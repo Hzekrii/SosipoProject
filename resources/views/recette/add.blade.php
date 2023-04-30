@@ -28,7 +28,7 @@
                                     <label for="av" class="form-label">Role</label>
                                     <select name="rubrique" class="form-control" id="#rubrique">
                                         @foreach ($rubriques as $rubrique)
-                                        <option value="{{ $rubrique->id }}" >{{ $rubrique->libelle }}</option>
+                                            <option value="{{ $rubrique->id }}" >{{ $rubrique->libelle }}</option>
                                         @endforeach
                                     </select>
                                     @error('rubrique')
@@ -56,7 +56,7 @@
 
 								<div class="align-items-center d-flex">
 									<button type="submit" class="btn btn-primary ms-auto">
-										Envoye
+										Envoyer
 									</button>
 								</div>
 							</form>
