@@ -20,7 +20,7 @@ class RembourssementController extends Controller
     public function index()
     {
         $credits=Credit::get();
-        $data=[  
+        $data=[
             'title'=>$des='Ajouter Un Remboursement',
             'description'=>$des,
             'credits'=>$credits,
@@ -34,7 +34,7 @@ class RembourssementController extends Controller
     // public function create()
     // {
     //     $credits=Credit::get();
-    //     $data=[  
+    //     $data=[
     //         'title'=>$des='Ajouter Un Remboursement',
     //         'description'=>$des,
     //         'credits'=>$credits,
@@ -47,7 +47,7 @@ class RembourssementController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'designation'=>'required|min:7',
             'credit_id'=>'required',
@@ -57,10 +57,12 @@ class RembourssementController extends Controller
 
         ]);
 
+
         $credit=Credit::find($request->credit_id);
+         
         $year=Carbon::createFromFormat('Y-m-d',$credit->date_credit)->year;
         $solde=Solde::where('annee',$year)->pluck('id')->first();
-        $remboursement=new Rembourssement(); 
+        $remboursement=new Rembourssement();
         $remboursement->credit_id=request('credit_id');
         $remboursement->designation=request('designation');
         $remboursement->montant=request('montant');
@@ -70,7 +72,7 @@ class RembourssementController extends Controller
         $remboursement->feuille=request('feuille')->store();
         $remboursement->save();
         $success = "Ajout avec success";
-        return back()->withSuccess($success); 
+        return back()->withSuccess($success);
     }
 
     /**
@@ -96,7 +98,7 @@ class RembourssementController extends Controller
     {
         $rembourssement=Rembourssement::find($id);
         $credits=Credit::get();
-        $data=[  
+        $data=[
             'title'=>$des='Modifier Un Rembourssement',
             'description'=>$des,
             'credits'=>$credits,
@@ -135,7 +137,7 @@ class RembourssementController extends Controller
         $rembourssement->credit_id=$request->credit_id;
         $rembourssement->montant = $request->montant;
         $rembourssement->date_remboursement = $request->date_remboursement;
-           
+
         // $rembourssement->user_id = auth()->id();
 
         if (file_exists($request->feuille)) {
