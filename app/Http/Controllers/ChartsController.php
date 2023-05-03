@@ -8,7 +8,7 @@ use App\Models\Document;
 use App\Models\Recette;
 use App\Models\Rubrique;
 use App\Models\Credit;
-use App\Models\Rembourssement;
+use App\Models\Remboursement;
 use App\Models\Solde;
 use Illuminate\Http\Request;
 
@@ -84,17 +84,41 @@ class ChartsController extends Controller
     }
     public function count()
     {
-        $numberOfRecettes = Recette::get()->where('approuve', true)->count();
-        $numberOfDepenses = Depense::get()->where('approuve', true)->count();
-        $numberOfCredits = Credit::get()->where('approuve', true)->count();
-        $numberOfRembourssements = Rembourssement::get()->where('approuve', true)->count();
-        $numberOfDocuments = Document::get()->count();
-        $numberOfAdherents = Adherent::get()->count();
-        
-        $solde = Solde::get()->where('annee', date('Y'))->first();
+        $numberOfRecettes = Recette::where('approuve', true)->count();
+        $numberOfDepenses = Depense::where('approuve', true)->count();
+        $numberOfCredits = Credit::where('approuve', true)->count();
+        $numberOfRembourssements = Remboursement::where('approuve', true)->count();
+        $numberOfDocuments = Document::count();
+        $numberOfAdherents = Adherent::count();
+
+        $credits = Credit::where('approuve', true)->get();
+        $completeCredits = 0;
+        $incompleteCredits = 0;
+        foreach ($credits as $credit) {
+            $remainingBalance = $credit->montant - $credit->remboursements()->sum('montant');
+            if ($remainingBalance == 0) {
+                $completeCredits++;
+            } else {
+                $incompleteCredits++;
+            }
+        }
+
+        $solde = Solde::where('annee', date('Y'))->first();
         $banqueSolde = $solde->banque;
         $caisseSolde = $solde->caisse;
-        $data = compact('numberOfRecettes', 'numberOfDepenses','numberOfCredits','numberOfRembourssements', 'numberOfDocuments', 'numberOfAdherents', 'banqueSolde', 'caisseSolde');
-    return $data;
+
+        $data = compact(
+            'numberOfRecettes',
+            'completeCredits',
+            'incompleteCredits',
+            'numberOfDepenses',
+            'numberOfCredits',
+            'numberOfRembourssements',
+            'numberOfDocuments',
+            'numberOfAdherents',
+            'banqueSolde',
+            'caisseSolde'
+        );
+        return $data;
     }
 }

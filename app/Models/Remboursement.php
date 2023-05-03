@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Credit;
 use App\Models\Solde;
-class Rembourssement extends Model
+class Remboursement extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['credit_id'];
     public function credit(){
         return $this->belongsTo(Credit::class);
     }

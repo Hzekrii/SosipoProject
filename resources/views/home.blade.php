@@ -83,8 +83,8 @@
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
-                                    <h5 class="card-title">Number of Credits</h5>
-                                    <p class="card-text">{{ $data['counts']['numberOfCredits'] }}</p>
+                                    <h5 class="card-title">Complete credits</h5>
+                                    <p class="card-text">{{ $data['counts']['completeCredits'] }}</p>
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
@@ -103,6 +103,24 @@
                                 <div class="col-8">
                                     <h5 class="card-title">Number of Rembourssements</h5>
                                     <p class="card-text">{{ $data['counts']['numberOfRembourssements'] }}</p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
+                                        <i class="fas fa-users text-lg opacity-10"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card h-100 ">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="card-title">Incomplete credits</h5>
+                                    <p class="card-text">{{ $data['counts']['incompleteCredits'] }}</p>
                                 </div>
                                 <div class="col-4 text-end">
                                     <div

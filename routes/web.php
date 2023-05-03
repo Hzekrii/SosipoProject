@@ -4,11 +4,11 @@ use App\Http\Controllers\AdherentController;
 use App\Http\Controllers\ApprouveRecettteController;
 use App\Http\Controllers\ApprouveDepenseController;
 use App\Http\Controllers\ApprouveCreditController;
-use App\Http\Controllers\ApprouveRembourssementController;
+use App\Http\Controllers\ApprouveremboursementController;
 use App\Http\Controllers\ChartsController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CreditController;
-use App\Http\Controllers\RembourssementController;
+use App\Http\Controllers\remboursementController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FunctionController;
@@ -16,8 +16,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecetteController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Models\Credit;
+use App\Models\remboursement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -56,10 +59,10 @@ Route::middleware(['auth', 'president'])->group(function () {
     /* End approuve credit*/
 
     /* Start approuve Depense*/
-    Route::get('/approuve/rembourssement/show', [ApprouveRembourssementController::class, 'index'])->name('approuve.rembourssement.show');
-    Route::post('/approuve/rembourssement/{id}', [ApprouveRembourssementController::class, 'approved'])->name('approuve.rembourssement.post');
-    Route::delete('/approuve/rembourssement/delete/{id}', [ApprouveRembourssementController::class, 'destroy'])->name('approuve.rembourssement.cancel');
-    /* End approuve rembourssement*/
+    Route::get('/approuve/remboursement/show', [ApprouveremboursementController::class, 'index'])->name('approuve.remboursement.show');
+    Route::post('/approuve/remboursement/{id}', [ApprouveremboursementController::class, 'approved'])->name('approuve.remboursement.post');
+    Route::delete('/approuve/remboursement/delete/{id}', [ApprouveremboursementController::class, 'destroy'])->name('approuve.remboursement.cancel');
+    /* End approuve remboursement*/
 });
 
 Route::middleware(['auth', 'isTresorieOrPresident'])->group(function () {
@@ -71,8 +74,8 @@ Route::middleware(['auth', 'isTresorieOrPresident'])->group(function () {
     Route::post('/depense/add', [DepenseController::class, 'add'])->name('post.depense.add');
     Route::get('/credit/add',  [CreditController::class, 'index'])->name('credit.add');
     Route::post('/credit/add', [CreditController::class, 'store'])->name('post.credit.add');
-    Route::get('/rembourssement/add',  [RembourssementController::class, 'index'])->name('rembourssement.add');
-    Route::post('/rembourssement/add', [RembourssementController::class, 'store'])->name('post.rembourssement.add');
+    Route::get('/remboursement/add',  [remboursementController::class, 'index'])->name('remboursement.add');
+    Route::post('/remboursement/add', [remboursementController::class, 'store'])->name('post.remboursement.add');
     /* End add */
 
     /* Begin recette */
@@ -103,11 +106,11 @@ Route::middleware(['auth', 'isTresorieOrPresident'])->group(function () {
     /* End Credits */
 
     /* Start Remboursements */
-    Route::get('/rembourssement/edit/{id}',     [RembourssementController::class, 'edit'])->name('rembourssement.edit');
-    Route::delete('rembourssement/delete/{id}', [RembourssementController::class, 'destroy'])->name('rembourssement.delete');
-    Route::put('/rembourssement/update/{id}', [RembourssementController::class, 'update'])->name('post.rembourssement.edit');
-    Route::get('/rembourssement/show', [RembourssementController::class, 'show'])->name('rembourssement.show');
-    Route::get('/rembourssement/pdf/{path}', [RembourssementController::class, 'viewPdf'])->name('viewPdf');
+    Route::get('/remboursement/edit/{id}',     [remboursementController::class, 'edit'])->name('remboursement.edit');
+    Route::delete('remboursement/delete/{id}', [remboursementController::class, 'destroy'])->name('remboursement.delete');
+    Route::put('/remboursement/update/{id}', [remboursementController::class, 'update'])->name('post.remboursement.edit');
+    Route::get('/remboursement/show', [remboursementController::class, 'show'])->name('remboursement.show');
+    Route::get('/remboursement/pdf/{path}', [remboursementController::class, 'viewPdf'])->name('viewPdf');
 
     /* End Remboursements */
 });
@@ -136,8 +139,24 @@ Route::get('/document/pdf/{path}', [DocumentController::class, 'viewPdf'])->name
 Route::get('/home', [ChartsController::class, 'chart'])->name('charts');
 
 
+
+
+Route::get('/remboursement/add/credits/{id}/reste', [remboursementController::class, 'getRemainingBalance']);
+
+
+
+
+
+// /*  Adherents Start  */
+
+
+// Route::get('/adherents', [AdherentController::class, 'index'])->name('adherents.index');
+// Route::get('/adherents/create', [AdherentController::class, 'create'])->name('adherents.create');
+// Route::post('/adherents', [AdherentController::class, 'store'])->name('adherents.store');
+// Route::get('/adherents/{adherent}', [AdherentController::class, 'show'])->name('adherents.show');
+// Route::get('/adherents/{adherent}/edit', [AdherentController::class, 'edit'])->name('adherents.edit');
+// Route::put('/adherents/{adherent}', [AdherentController::class, 'update'])->name('adherents.update');
+// Route::delete('/adherents/{adherent}', [AdherentController::class, 'destroy'])->name('adherents.destroy');
+
+// /*  Adherents End  */
 Route::resource('adherents', AdherentController::class);
-Route::get('/test123', function () {
-    Auth::logout();
-    return view('hey');
-})->name('l');

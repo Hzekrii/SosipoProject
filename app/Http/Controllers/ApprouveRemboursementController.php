@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Rembourssement;
+use App\Models\Remboursement;
 use App\Models\Credit;
 use Illuminate\Http\Request;
 use App\Models\Solde;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
-class ApprouveRembourssementController extends Controller
+class ApprouveRemboursementController extends Controller
 {
     public function index()
     {
@@ -17,47 +17,47 @@ class ApprouveRembourssementController extends Controller
         // Get all users
         $users = User::get();
         // Get all invalid depenses (where 'approuve' column is false)
-        $rembourssementsInvalide = Rembourssement::where('approuve', false)->get();
+        $remboursementsInvalide = Remboursement::where('approuve', false)->get();
 
         // Create an array of data to be passed to the view
         $data = [
-            'rembourssementsInvalide' => $rembourssementsInvalide,
+            'remboursementsInvalide' => $remboursementsInvalide,
             'users' => $users,
             'credits' => $credits,
         ];
 
         // Load the 'approuve.showDepense' view with the data
-        return view('approuve.showRembourssement', $data);
+        return view('approuve.showRemboursement', $data);
     }
 
     public function approved($id)
     {
         // Find the Depense with the given $id
-        $rembourssement = Rembourssement::find($id);
+        $remboursement = Remboursement::find($id);
         // Set 'approuve' column to true
-        $rembourssement->approuve = true;
+        $remboursement->approuve = true;
 
         // Get the Solde with id "1"
         $solde = Solde::where('annee',date('Y'))->get()->first();
-        // Subtract the rembourssement amount from the bank balance
-        $solde->banque += $rembourssement->montant;
-        // Save the Solde and rembourssement changes to the database
+        // Subtract the remboursement amount from the bank balance
+        $solde->banque += $remboursement->montant;
+        // Save the Solde and remboursement changes to the database
         $solde->save();
-        $rembourssement->save();
+        $remboursement->save();
         // Redirect to the same page with a success message
-        return redirect()->route('approuve.rembourssement.show')->withSuccess('Le Rembourssement approuvé avec succès.');
+        return redirect()->route('approuve.remboursement.show')->withSuccess('Le remboursement approuvé avec succès.');
     }
 
     public function destroy($id)
     {
         // Find the Depense with the given $id
-        $rembourssement = Rembourssement::find($id);
-        // Delete the rembourssement from the database
-        $rembourssement->delete();
-        // Delete the file associated with the rembourssement from the storage
-        Storage::delete('app/', $rembourssement->feuille);
+        $remboursement = Remboursement::find($id);
+        // Delete the remboursement from the database
+        $remboursement->delete();
+        // Delete the file associated with the remboursement from the storage
+        Storage::delete('app/', $remboursement->feuille);
 
         // Redirect back to the same page with a success message
-        return back()->withSuccess('Rembourssement annulée avec succès.');
+        return back()->withSuccess('remboursement annulée avec succès.');
     }
 }

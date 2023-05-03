@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rembourssements', function (Blueprint $table) {
+        Schema::create('remboursements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('credit_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->text('designation');
+            $table->text('designation')->nullable();
             $table->double('montant');
             $table->boolean('approuve');
             $table->date('date_remboursement');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rembourssements');
+        Schema::dropIfExists('remboursements');
     }
 };

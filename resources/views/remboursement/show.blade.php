@@ -11,8 +11,8 @@
                     style="font-size: 0.9em;">
                     @if (Auth::user()->role_id == '2')
                         <div class="d-flex justify-content-start ms-3 mt-3">
-                            <a href="{{ route('rembourssement.add') }}" class="btn btn-success text-light"><i
-                                    class="bi bi-plus-circle me-2"></i>Nouveau rembourssement</a>
+                            <a href="{{ route('remboursement.add') }}" class="btn btn-success text-light"><i
+                                    class="bi bi-plus-circle me-2"></i>Nouveau remboursement</a>
                         </div>
                     @endif
                     <thead>
@@ -27,53 +27,53 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($rembourssements as $rembourssement)
+                        @foreach ($remboursements as $remboursement)
                             <tr>
-                                <td>{{ $rembourssement->credit->designation }}</td>
-                                <td>{{ $rembourssement->designation }}</td>
-                                <td>{{ $rembourssement->montant }}</td>
+                                <td>{{ $remboursement->credit->designation }}</td>
+                                <td>{{ $remboursement->designation }}</td>
+                                <td>{{ $remboursement->montant }}</td>
                                 <td>
-                                    @if ($rembourssement->approuve)
+                                    @if ($remboursement->approuve)
                                         <span class="badge bg-success text-white mx-auto"
                                             style="width:90px:height:30px">Approuvé</span>
                                     @else
                                         <span class="badge bg-warning text-dark">En attente</span>
                                     @endif
                                 </td>
-                                <td>{{ $rembourssement->date_remboursement }}</td>
-                                {{-- <td>{{ $rembourssement->user->name }}</td> --}}
+                                <td>{{ $remboursement->date_remboursement }}</td>
+                                {{-- <td>{{ $remboursement->user->name }}</td> --}}
                                 <td>
-                                    <a href="{{ url('rembourssement/pdf/' . $rembourssement->feuille) }}"
+                                    <a href="{{ url('remboursement/pdf/' . $remboursement->feuille) }}"
                                         class="btn btn-primary" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
                                 </td>
                                 <td>
-                                    @if ($rembourssement->approuve)
+                                    @if ($remboursement->approuve)
                                         {{ 'ACTIONS INTERDITS !' }}
                                     @else
-                                        <a href="{{ route('rembourssement.edit', ['id' => $rembourssement->id]) }}"
+                                        <a href="{{ route('remboursement.edit', ['id' => $remboursement->id]) }}"
                                             class="btn btn-primary mx-1">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal{{ $rembourssement->id }}">
+                                            data-bs-target="#deleteConfirmationModal{{ $remboursement->id }}">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                         <!-- Delete confirmation modal -->
-                                        <div class="modal fade" id="deleteConfirmationModal{{ $rembourssement->id }}"
+                                        <div class="modal fade" id="deleteConfirmationModal{{ $remboursement->id }}"
                                             tabindex="-1"
-                                            aria-labelledby="deleteConfirmationModalLabel{{ $rembourssement->id }}"
+                                            aria-labelledby="deleteConfirmationModalLabel{{ $remboursement->id }}"
                                             aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title text-dark"
-                                                            id="deleteConfirmationModalLabel{{ $rembourssement->id }}">
+                                                            id="deleteConfirmationModalLabel{{ $remboursement->id }}">
                                                             Confirmer la suppression</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body text-dark">
-                                                        Vous ne pouvez pas supprimer cette rembourssement.
+                                                        Vous ne pouvez pas supprimer cette remboursement.
                                                     </div>
                                                     <div class="modal-footer">
                                                         <div class="row justify-content-end">
@@ -83,7 +83,7 @@
                                                             </div>
                                                             <div class="col-auto">
                                                                 <form
-                                                                    action="{{ route('rembourssement.delete', $rembourssement->id) }}"
+                                                                    action="{{ route('remboursement.delete', $remboursement->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')

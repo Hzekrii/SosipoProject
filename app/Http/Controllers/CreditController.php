@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Credit;
 use App\Models\User;
 use App\Models\Adherent;
-use App\Models\Rembourssement;
+use App\Models\remboursement;
 use App\Models\Solde;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -18,9 +18,9 @@ class CreditController extends Controller
      */
     public function index()
 {
-    
+
     $adherents=Adherent::get();
-        $data=[  
+        $data=[
             'title'=>$des='Ajouter Un Crédit',
             'description'=>$des,
             'adherents'=>$adherents,
@@ -35,7 +35,7 @@ class CreditController extends Controller
     // public function create()
     // {
     //     $adherents=Adherent::get();
-    //     $data=[  
+    //     $data=[
     //         'title'=>$des='Ajouter Un Crédit',
     //         'description'=>$des,
     //         'adherents'=>$adherents,
@@ -48,7 +48,7 @@ class CreditController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'designation'=>'required|min:7',
             'adherent_id'=>'required',
@@ -56,14 +56,14 @@ class CreditController extends Controller
             'modepaiement' => 'required',
             'date_credit' => 'required',
             'file' => 'required|file|mimes:pdf',
-            
+
         ]);
 
         $year=Carbon::createFromFormat('Y-m-d',$request->date_credit)->year;
         $solde=Solde::where('annee',$year)->pluck('id')->first();
-        
+
         //  dd($solde);
-        $credit=new Credit(); 
+        $credit=new Credit();
         $credit->adherent_id=request('adherent_id');
         $credit->designation=request('designation');
         $credit->montant=request('montant');
@@ -75,20 +75,20 @@ class CreditController extends Controller
         $credit->save();
         $success = "Ajout avec success";
         return back()->withSuccess($success);
-        
+
         }
-        
+
     /**
      * Display the specified resource.
      */
     public function show(Credit $credit)
     {
-        $sommes = Rembourssement::selectRaw('credit_id, SUM(montant) as sum')
+        $sommes = remboursement::selectRaw('credit_id, SUM(montant) as sum')
                           ->where('approuve',1)
                           ->groupBy('credit_id')
                           ->get();
-   
-        $credits = Credit::simplePaginate(5);
+
+        $credits = Credit::all();
 
         $restes = array();
         foreach($credits as $credit) {
@@ -97,7 +97,7 @@ class CreditController extends Controller
                 'reste' => $credit->montant - ($sommes->where('credit_id', $credit->id)->first()->sum ?? 0),
             ];
         }
-        
+
         $users = User::get();
         $data = [
             'credits' => $credits,
@@ -110,11 +110,11 @@ class CreditController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    
+
     public function edit($id)
     {
         $credit = Credit::find($id);
-        $adherents=Adherent::get(); 
+        $adherents=Adherent::get();
         $data=[
             'title'=>$des='Modifier Un Crédit',
             'description'=>$des,
@@ -138,7 +138,7 @@ class CreditController extends Controller
             'file' => 'required|file|mimes:pdf',
         ]);
         $solde = Solde::find("1");
-        
+
         if ($request->modepaiement == "1") {
             if ($solde->banque - $request->montant < 0)
                 return back()->withError('Solde banque insuffisant.');
@@ -157,7 +157,7 @@ class CreditController extends Controller
         $credit->adherent_id = $request->adherent_id;
         $credit->date_credit = $request->date_credit;
         $credit->approuve=$credit->approuve;
-            
+
         // $credit->user_id = auth()->id();
 
         if (file_exists($request->file)) {
@@ -174,10 +174,10 @@ class CreditController extends Controller
         // Redirect back with a success message
         return redirect()->route('credit.show')->with('success', 'Credit enregistré avec succes.');
     }
-    
+
     public function viewPdf($path)
     {
-        
+
         $filePath = storage_path('app/' . $path);
         if (File::exists($filePath)) {
             return response()->file($filePath, [
@@ -187,13 +187,13 @@ class CreditController extends Controller
         // If the file doesn't exist, return a 404 response
         abort(404);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        
+
         $credit = credit::find($id);
         if (!$credit->approuve) {
             $credit->delete();

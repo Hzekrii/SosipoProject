@@ -13,16 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class DepenseController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     public function index()
     {
         $rubriques = Rubrique::where('for', true)->get();
         $data = ['rubriques' => $rubriques];
-        return view('depense.add', $data);
+        return view('depense.index', $data);
     }
 
     public function show()
@@ -123,7 +120,7 @@ class DepenseController extends Controller
     }
     public function viewPdf($path)
     {
-        
+
         $filePath = storage_path('app/' . $path);
         if (File::exists($filePath)) {
             return response()->file($filePath, [

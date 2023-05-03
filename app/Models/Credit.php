@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Adherent;
-use App\Models\Rembourssement;
+use App\Models\remboursement;
 use App\Models\Solde;
 class Credit extends Model
 {
@@ -17,8 +17,8 @@ class Credit extends Model
         return $this->belongsTo(Adherent::class);
     }
 
-    public function rembourssements(){
-        return $this->hasMany(Rembourssement::class);
+    public function remboursements(){
+        return $this->hasMany(remboursement::class);
     }
     public function solde(){
         return $this->belongsTo(Solde::class);

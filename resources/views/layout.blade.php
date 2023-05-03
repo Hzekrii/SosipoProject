@@ -13,7 +13,7 @@
         Sosipo
     </title>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
@@ -115,7 +115,7 @@
 
                     <li class="nav-item mt-3">
                         <a class="nav-link  btn btn-gradient-success text-light  "
-                            href="{{ route('rembourssement.show') }}">
+                            href="{{ route('remboursement.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-graph-down-arrow text-light text-lg "></i>
@@ -133,6 +133,15 @@
                         <span class="nav-link-text ms-1 mt-2 fw-bold">Document</span>
                     </a>
                 </li>
+                <li class="nav-item mt-3">
+                    <a class="nav-link  btn btn-gradient-success text-light " href="{{ route('adherents.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-filetype-doc text-light text-lg "></i>
+                        </div>
+                        <span class="nav-link-text ms-1 mt-2 fw-bold">Adherent</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </aside>
@@ -146,7 +155,7 @@
                             <li class="nav-item dropdown text-dark pe-2 mx-3 d-flex align-items-center">
                                 <a href="javascript:;"
                                     class="nav-link  p-0
-                                    @if (DB::table('rembourssements')->where('approuve', false)->count() +
+                                    @if (DB::table('remboursements')->where('approuve', false)->count() +
                                             DB::table('credits')->where('approuve', false)->count() +
                                             DB::table('depenses')->where('approuve', false)->count() +
                                             DB::table('recettes')->where('approuve', false)->count() >
@@ -185,7 +194,8 @@
                                                                 $diff = $created_at->diffForHumans();
                                                                 echo $diff;
                                                             } else {
-                                                                echo '<p class="text-xs text-secondary mb-0">Tout les depenses sont approuvé.</p>';
+                                                                echo '<p class="text-xs text-secondary mb-0">Tout les depenses sont
+                                                        approuvé.</p>';
                                                             }
                                                         @endphp
                                                     </p>
@@ -209,7 +219,6 @@
                                                         </div>
                                                     </div>
 
-
                                                     <p class="text-xs text-secondary mb-0">
                                                         <i class="fa fa-clock me-1"></i>
                                                         @php
@@ -221,7 +230,8 @@
                                                                 $diff = $created_at->diffForHumans();
                                                                 echo $diff;
                                                             } else {
-                                                                echo '<p class="text-xs text-secondary mb-0">Tout les recettes  sont approuvé.</p>';
+                                                                echo '<p class="text-xs text-secondary mb-0">Tout les recettes sont
+                                                        approuvé.</p>';
                                                             }
                                                         @endphp
                                                     </p>
@@ -256,7 +266,8 @@
                                                                 $diff = $created_at->diffForHumans();
                                                                 echo $diff;
                                                             } else {
-                                                                echo '<p class="text-xs text-secondary mb-0">Tout les credits sont approuvé.</p>';
+                                                                echo '<p class="text-xs text-secondary mb-0">Tout les credits sont
+                                                        approuvé.</p>';
                                                             }
                                                         @endphp
                                                     </p>
@@ -267,7 +278,7 @@
 
                                     <li class="mb-2">
                                         <a class="dropdown-item text-dark border-radius-md"
-                                            href="{{ route('approuve.rembourssement.show') }}">
+                                            href="{{ route('approuve.remboursement.show') }}">
                                             <div class="d-flex py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <div class="d-flex justify-content-between">
@@ -277,22 +288,23 @@
                                                         </div>
                                                         <div class="col">
                                                             <p class="badge text-danger me-auto">
-                                                                {{ DB::table('rembourssements')->where('approuve', false)->count() }}
+                                                                {{ DB::table('remboursements')->where('approuve', false)->count() }}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <p class="text-xs text-secondary mb-0">
                                                         <i class="fa fa-clock me-1"></i>
                                                         @php
-                                                            $rembourssement = DB::table('rembourssements')
+                                                            $remboursement = DB::table('remboursements')
                                                                 ->where('approuve', false)
                                                                 ->first();
-                                                            if ($rembourssement) {
-                                                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $rembourssement->created_at);
+                                                            if ($remboursement) {
+                                                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $remboursement->created_at);
                                                                 $diff = $created_at->diffForHumans();
                                                                 echo $diff;
                                                             } else {
-                                                                echo '<p class="text-xs text-secondary mb-0">Tout les rembourssements sont approuvé.</p>';
+                                                                echo '<p class="text-xs text-secondary mb-0">Tout les
+                                                        remboursements sont approuvé.</p>';
                                                             }
                                                         @endphp
                                                     </p>
