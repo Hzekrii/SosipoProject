@@ -388,6 +388,7 @@
     </main>
     </div>
     @include('scripts')
+    @yield('scripts')
 </body>
 
 </html>

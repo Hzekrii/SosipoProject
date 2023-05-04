@@ -60,7 +60,9 @@ class RemboursementController extends Controller
             $remboursement->approuve = false;
             $remboursement->solde_id = $solde->id;
             $remboursement->date_remboursement = $request->date_remboursement;
-            $remboursement->feuille = $request->file('feuille')->store('remboursements');
+            $remboursement->feuille = $request->file('feuille')->store(
+                
+            );
             $remboursement->save();
 
             $success = "Ajout avec succès";

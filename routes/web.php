@@ -20,7 +20,7 @@ use App\Models\Credit;
 use App\Models\remboursement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CategorieController;
 
 
 
@@ -150,13 +150,6 @@ Route::get('/remboursement/add/credits/{id}/reste', [remboursementController::cl
 // /*  Adherents Start  */
 
 
-// Route::get('/adherents', [AdherentController::class, 'index'])->name('adherents.index');
-// Route::get('/adherents/create', [AdherentController::class, 'create'])->name('adherents.create');
-// Route::post('/adherents', [AdherentController::class, 'store'])->name('adherents.store');
-// Route::get('/adherents/{adherent}', [AdherentController::class, 'show'])->name('adherents.show');
-// Route::get('/adherents/{adherent}/edit', [AdherentController::class, 'edit'])->name('adherents.edit');
-// Route::put('/adherents/{adherent}', [AdherentController::class, 'update'])->name('adherents.update');
-// Route::delete('/adherents/{adherent}', [AdherentController::class, 'destroy'])->name('adherents.destroy');
-
-// /*  Adherents End  */
 Route::resource('adherents', AdherentController::class);
+// /*  Adherents End  */
+Route::resource('categories',CategorieController::class);

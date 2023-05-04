@@ -26,7 +26,7 @@ class ApprouveRemboursementController extends Controller
             'credits' => $credits,
         ];
 
-        // Load the 'approuve.showDepense' view with the data
+        // Load the 'approuve.showRemboursement' view with the data
         return view('approuve.showRemboursement', $data);
     }
 
