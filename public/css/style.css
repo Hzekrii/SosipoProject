@@ -1,0 +1,102 @@
+/* Style for the overlay */
+
+@keyframes bounce {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-filter: blur(0);
+        filter: blur(0);
+    }
+    50% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+        -webkit-filter: blur(1.4);
+        filter: blur(1.4);
+        box-shadow: 0px 0.3px 5px 0.5px rgb(167, 167, 167);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/* img {
+    width: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: 0px 7px 20px 2px rgba(167, 167, 167, 0.60); 
+    border-radius: 2px;
+    animation: bounce 1.4s ease infinite;
+    -webkit-animation: bounce 1.4s ease infinite;
+    -moz-animation: bounce 1.4s ease infinite;
+    -ms-animation: bounce 1.4s ease infinite;
+    -o-animation: bounce 1.4s ease infinite;
+ }  */
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+/* Style for the loading page */
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    z-index: 10000;
+}
+
+/* Style for the logo */
+.logo {
+    width: 190px;
+    height: 190px;
+    background-image: url("../images/sosipo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: spin 1.4s linear infinite;
+}
+
+/* Style for the progress bar container */
+.progress-container {
+    width: 80%;
+    height: 20px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+/* Style for the progress bar */
+.progress-bar {
+    height: 100%;
+    background-color: #4c56af;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Animation keyframes for logo */
+@keyframes spin {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.9);
+    }
+}

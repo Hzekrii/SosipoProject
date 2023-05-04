@@ -19,7 +19,6 @@
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- CSS Files -->
     <!-- animation css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- End animation css -->
@@ -31,6 +30,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
         main {
             min-height: 100vh;
@@ -75,7 +76,8 @@
         <div class="collapse navbar-collapse h-100">
             <ul class="navbar-nav">
                 <li class="nav-item mt-3">
-                    <a class="nav-link  btn btn-gradient-success text-light  " href="{{ route('charts') }}">
+                    <a id="loading" onclick="showLoading(event)"
+                        class="nav-link  btn btn-gradient-success text-light  " href="{{ route('charts') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-dashboard text-light  text-lg"></i>
@@ -85,7 +87,9 @@
                 </li>
                 @if (auth()->user()->role_id != '3')
                     <li class="nav-item mt-3">
-                        <a class="nav-link btn btn btn-gradient-success text-light " href="{{ route('recette.show') }}">
+                        <a id="loading" onclick="showLoading(event)"
+                            class="nav-link btn btn btn-gradient-success text-light "
+                            href="{{ route('recette.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-graph-up-arrow text-light text-lg"></i>
@@ -94,7 +98,8 @@
                         </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <a class="nav-link  btn btn-gradient-success text-light  " href="{{ route('depense.show') }}">
+                        <a id="loading" onclick="showLoading(event)"
+                            class="nav-link  btn btn-gradient-success text-light  " href="{{ route('depense.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-graph-down-arrow text-light text-lg "></i>
@@ -104,7 +109,8 @@
                     </li>
 
                     <li class="nav-item mt-3">
-                        <a class="nav-link  btn btn-gradient-success text-light  " href="{{ route('credit.show') }}">
+                        <a id="loading" onclick="showLoading(event)"
+                            class="nav-link  btn btn-gradient-success text-light  " href="{{ route('credit.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-graph-down-arrow text-light text-lg "></i>
@@ -114,18 +120,20 @@
                     </li>
 
                     <li class="nav-item mt-3">
-                        <a class="nav-link  btn btn-gradient-success text-light  "
+                        <a id="loading" onclick="showLoading(event)"
+                            class="nav-link  btn btn-gradient-success text-light  "
                             href="{{ route('remboursement.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-graph-down-arrow text-light text-lg "></i>
+                                <i class="bi bi-graph-up-arrow text-light text-lg"></i>
                             </div>
                             <span class="nav-link-text ms-1 mt-2 fw-bold">Remboursement</span>
                         </a>
                     </li>
                 @endif
                 <li class="nav-item mt-3">
-                    <a class="nav-link  btn btn-gradient-success text-light " href="{{ route('document.show') }}">
+                    <a id="loading" onclick="showLoading(event)"
+                        class="nav-link  btn btn-gradient-success text-light " href="{{ route('document.show') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-filetype-doc text-light text-lg "></i>
@@ -134,7 +142,8 @@
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a class="nav-link  btn btn-gradient-success text-light " href="{{ route('adherents.index') }}">
+                    <a id="loading" onclick="showLoading(event)"
+                        class="nav-link  btn btn-gradient-success text-light " href="{{ route('adherents.index') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-filetype-doc text-light text-lg "></i>
