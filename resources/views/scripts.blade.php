@@ -22,5 +22,49 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function showLoading(event) {
+            // Prevent the link from navigating to the URL right away
+            event.preventDefault();
+
+            // Create the overlay
+            var overlay = document.createElement("div");
+            overlay.className = "overlay";
+            document.body.appendChild(overlay);
+
+            // Show the loading page
+            var loadingPage = document.createElement("div");
+            loadingPage.className = "loading";
+            var logo = document.createElement("div");
+            logo.className = "logo";
+            loadingPage.appendChild(logo);
+            var progressContainer = document.createElement("div");
+            progressContainer.className = "progress-container";
+            var progressBar = document.createElement("div");
+            progressBar.className = "progress-bar";
+            progressContainer.appendChild(progressBar);
+            loadingPage.appendChild(progressContainer);
+            document.body.appendChild(loadingPage);
+
+            // Set the progress bar value to 0%
+            var progressValue = 0;
+            progressBar.style.width = progressValue + "%";
+
+            // Update the progress bar every 100ms until it reaches 100%
+            var interval = setInterval(function() {
+                progressValue += 10;
+                progressBar.style.width = progressValue + "%";
+                progressBar.innerHTML = progressValue + "%";
+                if (progressValue >= 100) {
+                    clearInterval(interval);
+                    // Redirect to the requested page after 3 seconds
+                    setTimeout(function() {
+                        window.location.href = event.target.href;
+                    }, 700);
+                }
+            }, 70);
+        }
+    </script>
     @yield('scripts')
     <!--  END js cripts  -->
