@@ -68,6 +68,6 @@ class Kernel extends HttpKernel
         'secretaire' => \App\Http\Middleware\secretaire::class,
         'isTresorieOrPresident' => \App\Http\Middleware\isTresorieOrPresident::class,
         'isSecretaireOrPresident' => \App\Http\Middleware\isSecretaireOrPresident::class,
-
+        'preventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
     ];
 }

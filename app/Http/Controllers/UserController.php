@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use function PHPUnit\Framework\isNull;
+
 class UserController extends Controller
 {
     public function logout()
@@ -28,24 +30,36 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $oldPassword = $request->input('oldPassword');
-        if (Hash::check($oldPassword, auth()->user()->password)) {
+        $user = User::find(auth()->id());
+
+        if (Hash::check($oldPassword, $user->password) && $request->filled('password')) {
             $validatedData = $request->validate([
                 'name' => 'required|min:5',
                 'email' => 'required|email',
-                'role_id' => 'required|exists:roles,id',
                 'password' => 'required|confirmed',
             ]);
 
-            $user = User::find(auth()->user()->id);
-            $user->name = $validatedData['name'];
-            $user->email = $validatedData['email'];
-            $user->role_id = $validatedData['role_id'];
-            $user->password = Hash::make($validatedData['password']);
-            $user->save();
+            $user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => Hash::make($validatedData['password']),
+            ]);
+        } else {
+            $validatedData = $request->validate([
+                'name' => 'required|min:5',
+                'email' => 'required|email',
+            ]);
 
-            return redirect('/profile')->with('success', 'Votre profil a été modifié avec succès');
+            $user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+            ]);
         }
 
-        return redirect('/user/edit')->with('error', 'Votre mot de passe n\'est pas correct');
+        if (isset($validatedData['password'])) {
+            return redirect('/profile')->with('success', 'Votre profil a été modifié avec succès');
+        } else {
+            return redirect('/user/edit')->with('error', 'Votre mot de passe n\'est pas correct');
+        }
     }
 }

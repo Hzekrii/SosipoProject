@@ -300,7 +300,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">Logout</button>
+                                </form>
                             </div>
                         </li>
                         <li class="nav-item d-lg-none ps-3 mx-3 d-flex align-items-center">

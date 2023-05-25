@@ -23,11 +23,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
 
 
-
 Route::get('/', function () {
-    Auth::logout();
-    return view('auth.login');
-})->name('login');
+    if (Auth::check()) {
+        return redirect('/home');
+    } else {
+        return view('auth.login');
+    }
+})->name('login')->middleware('preventBackHistory');
+
+
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/login', [LoginController::class, 'check'])->name('check');
