@@ -18,7 +18,7 @@ class RecetteController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function create()
     {
         $rubriques = Rubrique::where('for', false)->get();
         $data = ['rubriques' => $rubriques];
@@ -158,7 +158,4 @@ class RecetteController extends Controller
         }
         return back()->withError('Vous ne pouvez pas supprimer cet recette.');
     }
-
-
-
 }

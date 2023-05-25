@@ -27,14 +27,13 @@ class AdherentController extends Controller
     {
         // Validate the request data
         $validatedData = $request->validate([
-        'matricule' => 'required|unique:adherents',
-        'name' => 'required',
-        'prenom' => 'required',
-        'cin' => 'required|unique:adherents',
-        'categorie_id' => 'required|exists:categories,id',
-        'nb_enfant' => 'required|integer|min:0',
-        'date' => 'nullable|date',
-        'situation_maritale' => 'nullable|integer|between:1,4',
+            'matricule' => 'required|unique:adherents',
+            'name' => 'required',
+            'prenom' => 'required',
+            'cin' => 'required|unique:adherents',
+            'categorie_id' => 'required|exists:categories,id',
+            'nb_enfant' => 'required|integer|min:0',
+            'situation_maritale' => 'nullable|integer|between:1,4',
         ]);
 
         // Create a new Adherent object and fill it with the validated data
@@ -82,4 +81,3 @@ class AdherentController extends Controller
         return redirect()->route('adherents.index');
     }
 }
-

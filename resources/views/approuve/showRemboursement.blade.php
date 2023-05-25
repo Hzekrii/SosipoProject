@@ -20,7 +20,7 @@ use App\Models\Adherent;
                 <a data-bs-dismiss="alert"><i class="fa-solid fa-xmark"></i></a>
             </div>
         @endif --}}
-                <table id="credits-table" class="table rounded table-light table-striped-columns table-hover"
+                <table id="table-datatable" class="table rounded  table-striped-columns table-hover  light-mode-table"
                     style="font-size: 0.9em;">
                     <thead>
                         <tr>

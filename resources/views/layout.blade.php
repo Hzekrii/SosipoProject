@@ -8,66 +8,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="{{ asset('images/sosipologo.png') }}">
     <title>
         Sosipo
     </title>
-    <!--     Fonts and icons     -->
 
-    <!-- Nucleo Icons -->
-    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- animation css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <!-- End animation css -->
-    <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.min.css?v=2.0.4') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <style>
-        main {
-            min-height: 100vh;
-            /* set minimum height to the viewport height */
-        }
-
-        /* Define the gradient background colors */
-        .btn-gradient-success {
-            background: linear-gradient(to left, #2DCE92, #2DCEC2);
-            background-color: #28a745;
-            /* fallback color for older browsers */
-            border-color: #28a745;
-            color: #fff;
-        }
-
-        /* Override the default "btn-success" class */
-        .btn-gradient-success:hover {
-            background: linear-gradient(to right, #2DCEC2, #2DCE92);
-            background-color: #007bff;
-            /* fallback color for older browsers */
-            border-color: #007bff;
-        }
-    </style>
-
+    @include('styles')
 </head>
 
-<body class="g-sidenav-show   bg-white-300">
-    <div class="min-height-200 bg-success position-absolute w-100"
-        style="background-image: url('{{ asset('images/img3.wallspic.com-triticale-agriculture-barley-food_grain-crop-2560x1600.jpg') }}')">
+<body class="g-sidenav-show   ">
+    <div class="min-height-200 bg-success position-absolute w-100" id="bg-image"
+        style="background-image: url('{{ asset('images/light-image.jpg') }}')">
     </div>
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs rounded  my-3 fixed-start ms-4 "
-        id="sidenav-main">
+    <aside class="sidenav  navbar navbar-vertical navbar-expand-xs rounded my-3 fixed-start ms-4" id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-10 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="#" target="_blank">
+            <a class="navbar-brand m-0" href="{{ route('charts') }}">
                 <img src="{{ asset('images/sosipologo.png') }}" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold">Sosipo</span>
             </a>
@@ -76,20 +32,20 @@
         <div class="collapse navbar-collapse h-100">
             <ul class="navbar-nav">
                 <li class="nav-item mt-3">
-                    <a id="loading" onclick="showLoading(event)"
-                        class="nav-link  btn btn-gradient-success text-light  " href="{{ route('charts') }}">
+                    <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        class="nav-link btn btn-gradient-success text-light" href="{{ route('charts') }}"
+                        data-color="success">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-dashboard text-light  text-lg"></i>
+                            <i class="fa fa-dashboard text-light text-lg"></i>
                         </div>
                         <span class="nav-link-text ms-1 mt-2 fw-bold">Dashboard</span>
                     </a>
                 </li>
                 @if (auth()->user()->role_id != '3')
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="showLoading(event)"
-                            class="nav-link btn btn btn-gradient-success text-light "
-                            href="{{ route('recette.show') }}">
+                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                            class="nav-link btn btn btn-gradient-success text-light" href="{{ route('recette.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-graph-up-arrow text-light text-lg"></i>
@@ -98,8 +54,8 @@
                         </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="showLoading(event)"
-                            class="nav-link  btn btn-gradient-success text-light  " href="{{ route('depense.show') }}">
+                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                            class="nav-link btn btn-gradient-success text-light" href="{{ route('depense.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-graph-down-arrow text-light text-lg "></i>
@@ -107,10 +63,9 @@
                             <span class="nav-link-text ms-1 mt-2 fw-bold">Depense</span>
                         </a>
                     </li>
-
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="showLoading(event)"
-                            class="nav-link  btn btn-gradient-success text-light  " href="{{ route('credit.show') }}">
+                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                            class="nav-link btn btn-gradient-success text-light" href="{{ route('credit.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-graph-down-arrow text-light text-lg "></i>
@@ -118,10 +73,9 @@
                             <span class="nav-link-text ms-1 mt-2 fw-bold">Crédit</span>
                         </a>
                     </li>
-
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="showLoading(event)"
-                            class="nav-link  btn btn-gradient-success text-light  "
+                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                            class="nav-link btn btn-gradient-success text-light"
                             href="{{ route('remboursement.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -132,8 +86,8 @@
                     </li>
                 @endif
                 <li class="nav-item mt-3">
-                    <a id="loading" onclick="showLoading(event)"
-                        class="nav-link  btn btn-gradient-success text-light " href="{{ route('document.show') }}">
+                    <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        class="nav-link btn btn-gradient-success text-light" href="{{ route('document.show') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-filetype-doc text-light text-lg "></i>
@@ -142,8 +96,8 @@
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a id="loading" onclick="showLoading(event)"
-                        class="nav-link  btn btn-gradient-success text-light " href="{{ route('adherents.index') }}">
+                    <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        class="nav-link btn btn-gradient-success text-light" href="{{ route('adherents.index') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-filetype-doc text-light text-lg "></i>
@@ -152,8 +106,10 @@
                     </a>
                 </li>
             </ul>
+
         </div>
     </aside>
+
     <main class="main-content position-relative ">
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
             data-scroll="false">
@@ -325,23 +281,27 @@
                                 </ul>
                             </li>
                         @endif
+
+                        <li class="navbar-item d-flex mx-3 align-items-center">
+                            <div class="form-check form-switch d-flex align-items-center">
+                                <input class="form-check-input" type="checkbox" id="dark-version">
+                                <label class="form-check-label ms-2" for="dark-version">
+                                    <span class="light-text">Light/</span>
+                                    <span class="dark-text">Dark</span>
+                                </label>
+                            </div>
+                        </li>
                         <li class="nav-item dropdown d-flex mx-3 align-items-center">
                             <a class="nav-link dropdown-toggle text-white font-weight-bold px-0" href="#"
                                 role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('storage/images/' . Auth::user()->url) }}"
-                                    style="width:40px;height:40px" class="rounded-circle img-thumbnail me-2"
-                                    alt="{{ auth()->user()->name }}">
+                                <img src="{{ asset('images/' . Auth::user()->url) }}" style="width:40px;height:40px"
+                                    class="rounded-circle img-thumbnail me-2" alt="{{ auth()->user()->name }}">
                                 <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
-                        </li>
-                        <li class="nav-item d-flex mx-3 align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0">
-                                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                            </a>
                         </li>
                         <li class="nav-item d-lg-none ps-3 mx-3 d-flex align-items-center">
                             <a href="#" class="nav-link text-white p-0" id="iconNavbarSidenav">
@@ -396,8 +356,59 @@
         </div>
     </main>
     </div>
+    {{-- <div class="fixed-plugin">
+        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+            <i class="fa fa-cog py-2"></i>
+        </a>
+        <div class="card shadow-lg">
+            <div class="card-header pb-0 pt-3">
+                <div class="float-start">
+                    <h5 class="mt-3 mb-0">Configuration</h5>
+                </div>
+                <div class="float-end mt-4">
+                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+                <!-- End Toggle Button -->
+            </div>
+            <div class="card-body pt-sm-3 pt-0 overflow-auto">
+                <div class="d-flex flex-column">
+                    <div class="mt-2 mb-5">
+                        <h6 class="mb-0">Sidebar Color</h6>
+                        <a href="javascript:void(0)" class="switch-trigger background-color">
+                            <div class="badge-colors my-2 text-start">
+                                <span class="badge filter bg-gradient-primary active" data-color="primary"
+                                    onclick="sidebarColor(this)"> </span>
+                                <span class="badge filter bg-gradient-dark" data-color="dark"
+                                    onclick="sidebarColor(this)"> </span>
+                                <span class="badge filter bg-gradient-info" data-color="info"
+                                    onclick="sidebarColor(this)"> </span>
+                                <span class="badge filter bg-gradient-success" data-color="success"
+                                    onclick="sidebarColor(this)"> </span>
+                                <span class="badge filter bg-gradient-warning" data-color="warning"
+                                    onclick="sidebarColor(this)"> </span>
+                                <span class="badge filter bg-gradient-danger" data-color="danger"
+                                    onclick="sidebarColor(this)"> </span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="mt-2 mb-5">
+                        <h6 class="mb-0">Light / Dark</h6>
+                        <div class="form-check form-switch ps-0 ms-auto my-auto">
+                            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
+                                onclick="darkMode(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
     @include('scripts')
-    @yield('scripts')
+    @stack('script')
+
+
 </body>
 
 </html>

@@ -16,9 +16,7 @@ return new class extends Migration
             $table->text('designation');
             $table->boolean('nature');
             $table->text('feuille');
-            //Rubriqure foreign ID
             $table->foreignId('type_courrier_id')->nullable()->constrained();
-            //the user that he created this recette
             $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });

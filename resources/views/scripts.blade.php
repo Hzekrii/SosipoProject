@@ -3,26 +3,44 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-    <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+    <script src="{{ asset('assets/js/argon-dashboard.js?v=2.0.4') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeSwitch = document.getElementById('dark-version');
+
+            // Load the user's preference from localStorage
+            const isDarkMode = localStorage.getItem('darkMode');
+
+            if (isDarkMode === 'true') {
+                darkModeSwitch.checked = true;
+                darkMode(darkModeSwitch);
+            }
+
+            darkModeSwitch.addEventListener('change', function() {
+                if (darkModeSwitch.checked) {
+                    darkMode(darkModeSwitch);
+                    localStorage.setItem('darkMode', true); // Store the preference in localStorage
+                } else {
+                    darkModeSwitch.checked = false;
+                    localStorage.setItem('darkMode', false);
+                    darkMode(darkModeSwitch);
+                }
+            });
+     
+        });
         $(document).ready(function() {
-            $('#recettes-table').DataTable({
+            $('#table-datatable').DataTable({
                 "paging": true,
                 "searching": true,
                 "ordering": true,
                 "info": true,
                 "responsive": true,
-                "columnDefs": [{
-                    "orderable": false,
-                    "targets": [5, 6, 7]
-                }]
             });
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function showLoading(event) {
             // Prevent the link from navigating to the URL right away
@@ -66,5 +84,5 @@
             }, 70);
         }
     </script>
-    @yield('scripts')
+
     <!--  END js cripts  -->

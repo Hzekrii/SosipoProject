@@ -15,11 +15,11 @@ class DepenseController extends Controller
 {
 
 
-    public function index()
+    public function create()
     {
         $rubriques = Rubrique::where('for', true)->get();
         $data = ['rubriques' => $rubriques];
-        return view('depense.index', $data);
+        return view('depense.add', $data);
     }
 
     public function show()
@@ -141,5 +141,4 @@ class DepenseController extends Controller
         }
         return back()->withError('Vous ne pouvez pas supprimer cet Depense.');
     }
-
 }

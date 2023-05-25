@@ -7,7 +7,7 @@
         </div>
         <div class="card-body px-4 pt-0 pb-2">
             <div class="table-responsive my-4">
-                <table id="recettes-table" class="table rounded table-light table-striped-columns table-hover"
+                <table id="table-datatable" class="table rounded  table-striped-columns table-hover  light-mode-table"
                     style="font-size: 0.9em;">
                     @if (Auth::user()->role_id == '2')
                         <div class="d-flex justify-content-start ms-3 mt-3">

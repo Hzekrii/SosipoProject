@@ -20,19 +20,6 @@
     }
 }
 
-/* img {
-    width: 300px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    box-shadow: 0px 7px 20px 2px rgba(167, 167, 167, 0.60); 
-    border-radius: 2px;
-    animation: bounce 1.4s ease infinite;
-    -webkit-animation: bounce 1.4s ease infinite;
-    -moz-animation: bounce 1.4s ease infinite;
-    -ms-animation: bounce 1.4s ease infinite;
-    -o-animation: bounce 1.4s ease infinite;
- }  */
-
 .overlay {
     position: absolute;
     top: 0;
@@ -44,49 +31,10 @@
 }
 
 /* Style for the loading page */
-.loading {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 250px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    z-index: 10000;
-}
+
 
 /* Style for the logo */
-.logo {
-    width: 190px;
-    height: 190px;
-    background-image: url("../images/sosipo.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    animation: spin 1.4s linear infinite;
-}
 
-/* Style for the progress bar container */
-.progress-container {
-    width: 80%;
-    height: 20px;
-    border: 1px solid #ccc;
-    margin-top: 5px;
-}
-
-/* Style for the progress bar */
-.progress-bar {
-    height: 100%;
-    background-color: #4c56af;
-    text-align: center;
-    line-height: 20px;
-    color: white;
-    transition: width 0.5s ease-in-out;
-}
 
 /* Animation keyframes for logo */
 @keyframes spin {
@@ -99,4 +47,156 @@
     100% {
         transform: scale(0.9);
     }
+}
+
+        main {
+            min-height: 100vh;
+            /* set minimum height to the viewport height */
+        }
+
+        .sidenav {
+            background-color: #ffffff;
+            /* Replace with your desired background color */
+        }
+
+        /* Define the gradient background colors */
+        .btn-gradient-success {
+            background: linear-gradient(to left, #1C9C6B, #2DCEC2);
+            background-color: #28a745;
+            /* fallback color for older browsers */
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        /* Override the default "btn-success" class */
+        .btn-gradient-success:hover {
+            background: linear-gradient(to right, #2DCEC2, #2DCE92);
+            background-color: #007bff;
+            /* fallback color for older browsers */
+            border-color: #007bff;
+        }
+.btn-gradient-danger {
+  background: linear-gradient(to left, #E03C31, #FF5964);
+  background-color: #dc3545;
+  /* fallback color for older browsers */
+  border-color: #dc3545;
+  color: #fff;
+}
+
+.btn-gradient-danger:hover {
+  background: linear-gradient(to right, #FF5964, #FF847C);
+  background-color: #ff0000;
+  /* fallback color for older browsers */
+  border-color: #ff0000;
+}
+.btn-gradient-warning {
+  background: linear-gradient(to left, #FFA900, #FFD100);
+  background-color: #ffc107;
+  /* fallback color for older browsers */
+  border-color: #ffc107;
+  color: #fff;
+}
+
+.btn-gradient-warning:hover {
+  background: linear-gradient(to right, #FFD100, #FFD64D);
+  background-color: #ff8c00;
+  /* fallback color for older browsers */
+  border-color: #ff8c00;
+}
+.btn-gradient-info {
+  background: linear-gradient(to left, #3A8FD9, #56C1FF);
+  background-color: #17a2b8;
+  /* fallback color for older browsers */
+  border-color: #17a2b8;
+  color: #fff;
+}
+
+.btn-gradient-info:hover {
+  background: linear-gradient(to right, #56C1FF, #62D5FF);
+  background-color: #007bff;
+  /* fallback color for older browsers */
+  border-color: #007bff;
+}
+.btn-gradient-dark {
+  background: linear-gradient(to left, #383838, #6C757D);
+  background-color: #343a40;
+  /* fallback color for older browsers */
+  border-color: #343a40;
+  color: #fff;
+}
+
+.btn-gradient-dark:hover {
+  background: linear-gradient(to right, #6C757D, #888A8D);
+  background-color: #000000;
+  /* fallback color for older browsers */
+  border-color: #000000;
+}
+.btn-gradient-primary {
+  background: linear-gradient(to left, #9c1c91, #c45abb);
+  background-color: #9c1c91;
+  /* fallback color for older browsers */
+  border-color: #9c1c91;
+  color: #fff;
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(to right, #2DCEC2, #2DCE92);
+  background-color: #007bff;
+  /* fallback color for older browsers */
+  border-color: #007bff;
+}
+
+        .light-mode-table th,
+        .light-mode-table td {
+            color: #000000;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-version.table th,
+        .dark-version.table td {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.logo {
+    width: 190px;
+    height: 190px;
+    background-image: url("../images/sosipo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: spin 1.4s linear infinite;
+}
+
+/* Style for the progress bar container */
+.progress-container {
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc;
+    margin-top: 2px;
+}
+
+/* Style for the progress bar */
+.progress-bar {
+    height: 100%;
+    background-color: #1C9C6B;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    transition: width 0.5s ease-in-out;
 }
