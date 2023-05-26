@@ -74,6 +74,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/approuve/remboursement/{id}', [ApprouveremboursementController::class, 'approved'])->name('approuve.remboursement.post');
         Route::delete('/approuve/remboursement/delete/{id}', [ApprouveremboursementController::class, 'destroy'])->name('approuve.remboursement.cancel');
         /* End approuve remboursement*/
+        
+        // /*  Adherents Start  */
+
+
+        Route::resource('adherents', AdherentController::class);
+        // /*  Adherents End  */
+        Route::resource('categories', CategorieController::class);
     });
 
     Route::middleware(['isTresorieOrPresident'])->group(function () {
@@ -159,12 +166,6 @@ Route::middleware('auth')->group(function () {
 
 
 
-    // /*  Adherents Start  */
-
-
-    Route::resource('adherents', AdherentController::class);
-    // /*  Adherents End  */
-    Route::resource('categories', CategorieController::class);
 
     //profile 
 

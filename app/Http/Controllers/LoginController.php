@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     public function __construct()
@@ -13,20 +14,37 @@ class LoginController extends Controller
     }
 
     public function check(Request $request)
-    {
+{
+    $request->validate([
+        'email' => 'required|email|exists:users,email',
+        'password'=>'required',
+    ]);
 
-        request()->validate([
-            'email' => 'required|min:3',
-            'password' => 'required'
-        ]);
-        $remember = request()->has('remember');
+    $email = $request->email;
+    $password = $request->password;
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+    $user = User::where('email', $email)->first();
 
-            return redirect('/home');
-        }
-        return  back()->withError('veuillez  vérifié votre informations')->withInput();
+    if ($user && !Hash::check($password, $user->password)) {
+        $errors = [
+            'password' => 'Invalid password'
+        ];
+        return back()->withErrors($errors)->withInput();
     }
+
+    $credentials = $request->only('email', 'password');
+    $remember = $request->has('remember');
+
+    if (Auth::attempt($credentials, $remember)) {
+        return redirect('/home');
+    }
+
+    return back()->withErrors(['login' => 'Invalid Email or Password'])->withInput();
+}
+
+    
+
+
     public function gotoHome()
     {
         $this->middleware('auth');

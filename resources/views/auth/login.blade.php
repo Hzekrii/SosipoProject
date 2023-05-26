@@ -17,6 +17,18 @@
 
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+       <style>
+            .invalid-bg{
+                background-color: rgb(247, 193, 193);
+            }
+       </style>
+        
+        
+        
+        
 </head>
 
 <body class="">
@@ -32,33 +44,68 @@
                                     <h4 class="font-weight-bolder">Sign In</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('check') }}" autocomplete="off">
+                                    {{-- <form method="POST" action="{{ route('check') }}" autocomplete="off">
                                         @csrf
+                                    
                                         <div class="mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg"
+                                            <input type="email" name="email" class="form-control {{ $errors->has('email') && $errors->has('password') ? 'is-invalid-email-password' : '' }} {{ $errors->has('email') && !$errors->has('password') ? 'is-invalid-email' : '' }} {{ !$errors->has('email') && $errors->has('password') ? 'is-invalid-password' : '' }} form-control-lg"
                                                 placeholder="Email" value="{{ old('email') }}" aria-label="Email">
+                                            @error('email')
+                                                <div class="text-danger" style="font-size: 14px">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('email')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        
                                         <div class="mb-3">
-                                            <input type="password" name="password" class="form-control form-control-lg "
-                                                placeholder="Password" value="{{ old('password') }}"
-                                                aria-label="password">
-                                        </div>
-                                        @error('password')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                            <input type="password" name="password" class="form-control {{ $errors->has('email') && $errors->has('password') ? 'is-invalid-email-password' : '' }} {{ !$errors->has('email') && $errors->has('password') ? 'is-invalid-password' : '' }} {{ $errors->has('email') && !$errors->has('password') ? 'is-invalid-email' : '' }} form-control-lg"
+                                                placeholder="Password" value="{{ old('password') }}" aria-label="password">
+                                            @error('password')
+                                                <div class="text-danger" style="font-size: 14px">{{ $message }}</div>
+                                            @enderror
+                                        </div>                                        
+                                        
+                                    
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" class="remember" type="checkbox"
-                                                id="remember">
+                                            <input class="form-check-input" class="remember" type="checkbox" id="remember">
                                             <label class="form-check-label" for="remember">Remember me</label>
                                         </div>
+                                    
                                         <div class="text-center">
-                                            <button type="submit"
-                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                                        </div>
+                                    </form> --}}
+                                    <form method="POST" action="{{ route('check') }}" autocomplete="off">
+                                        @csrf
+                                    
+                                        <div class="mb-3">
+                                            <input type="email" name="email" class="form-control @error('email') is-invalid invalid-bg @enderror form-control-lg"
+                                                placeholder="Email" value="{{ old('email') }}" aria-label="Email">
+                                            @error('email')
+                                                <div class="text-danger" style="font-size: 14px">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    
+                                        <div class="mb-3">
+                                            <input type="password" name="password" class="form-control @error('password') is-invalid invalid-bg @enderror form-control-lg"
+                                                placeholder="Password" value="{{ old('password') }}" aria-label="password">
+                                            @error('password')
+                                                <div class="text-danger" style="font-size: 14px">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" class="remember" type="checkbox" id="remember">
+                                            <label class="form-check-label" for="remember">Remember me</label>
+                                        </div>
+                                    
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
                                         </div>
                                     </form>
+                                    
+                                   
+                                    
+                                    
+
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
@@ -91,8 +138,7 @@
     </main>
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-
+    
 
 </body>
 
