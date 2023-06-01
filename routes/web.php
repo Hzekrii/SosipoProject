@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/approuve/remboursement/{id}', [ApprouveremboursementController::class, 'approved'])->name('approuve.remboursement.post');
         Route::delete('/approuve/remboursement/delete/{id}', [ApprouveremboursementController::class, 'destroy'])->name('approuve.remboursement.cancel');
         /* End approuve remboursement*/
-        
+
         // /*  Adherents Start  */
 
 
@@ -95,7 +95,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/remboursement/add',  [remboursementController::class, 'index'])->name('remboursement.add');
         Route::post('/remboursement/add', [remboursementController::class, 'store'])->name('post.remboursement.add');
         /* End add */
-        Route::get('/generate-pdf', [ChartsController::class, 'generatePDF']);
+        Route::get('/generate-pdf', [ChartsController::class, 'generatePDF'])->name('generate.financialRepport');
 
         /* Begin recette */
         Route::get('/recette/edit/{id}', [RecetteController::class, 'edit'])->name('recette.edit');

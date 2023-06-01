@@ -10,7 +10,7 @@
 
                 <table id="table-datatable" class="table rounded  table-striped-columns table-hover  light-mode-table"
                     style="width:100%">
-                    @if (Auth::user()->role_id == '2' || Auth::user()->role_id == '1')
+                    @if (Auth::user()->role_id != '3')
                         <div class="d-flex justify-content-start ms-3 mt-3">
                             <a href="{{ route('adherents.create') }}" class="btn btn-success text-light"><i
                                     class="bi bi-plus-circle me-2"></i>Nouveau adherents</a>

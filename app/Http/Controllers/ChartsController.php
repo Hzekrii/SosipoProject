@@ -173,11 +173,13 @@ class ChartsController extends Controller
         $depenseData = $this->depenseRubrique();
         // Create the PDF
         $pdf = new Dompdf();
-
+        $numberOfAdherents = Adherent::whereYear('created_at', $this->selectedYear)->count();
         // Pass the data to the view file
         $data = [
             'recetteData' => $recetteData,
             'depenseData' => $depenseData,
+            'year' => $this->selectedYear,
+            'numberOfAdherents' =>  $numberOfAdherents,
         ];
 
 

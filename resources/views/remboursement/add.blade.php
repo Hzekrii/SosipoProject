@@ -43,14 +43,14 @@
                                     <div class="error">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3 reste">
                                 <label for="reste" class="mb-2 text-muted">Reste</label>
-                                <div id="reste"></div>
+                                <div id="reste" class="fw-bold ms-2"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="montant" class="mb-2 text-muted">Montant</label>
-                                <input type="number" name="montant" class="form-control" id="montant">
+                                <input type="number" name="montant" class="form-control" min="0" id="montant">
                                 @error('montant')
                                     <div class="error">{{ $message }}</div>
                                 @enderror
@@ -96,50 +96,51 @@
                     .then(data => {
                         // Remove the quotes from the remaining balance value
                         var remainingBalance = parseInt(data.replace(/['"]+/g, ''));
-                        document.getElementById("reste").textContent = remainingBalance;
+                        document.getElementById("reste").textContent = remainingBalance + ' dh';
                     })
                     .catch(error => console.error(error));
             }
         }
 
+        function checkMontant() {
+            var montantInput = document.getElementById("montant");
+            var remainingBalance = parseInt(document.getElementById("reste").textContent);
+            var montantValue = parseFloat(montantInput.value);
 
-function checkMontant() {
-    var montantInput = document.getElementById("montant");
-    var remainingBalance = parseInt(document.getElementById("reste").textContent);
-    var montantValue = parseFloat(montantInput.value);
+            if (montantValue > remainingBalance) {
+                var button = document.getElementById("button");
+                button.disabled = true;
+                montantInput.style.borderColor = "red";
+                montantInput.style.backgroundColor = "#FFC9C9"; // set background color to light red
 
-    if (montantValue > remainingBalance) {
-        var button = document.getElementById("button");
-        button.disabled = true;
-        montantInput.style.borderColor = "red";
-        montantInput.style.backgroundColor = "#FFC9C9"; // set background color to light red
+                // Display error message if not already shown
+                var errorMessage = montantInput.parentElement.querySelector(".error");
+                if (!errorMessage) {
+                    errorMessage = document.createElement("div");
+                    errorMessage.className = "error";
+                    errorMessage.textContent = "Le montant doit être inférieur ou égal au reste.";
+                    montantInput.parentElement.appendChild(errorMessage);
+                }
+            } else {
+                var button = document.getElementById("button");
+                button.disabled = false;
+                montantInput.style.borderColor = "";
+                montantInput.style.backgroundColor = ""; // remove background color
 
-        // Display error message
-        var errorMessage = document.createElement("div");
-        errorMessage.className = "error";
-        errorMessage.textContent = "Le montant doit être inférieur ou égal au reste.";
-        montantInput.parentElement.appendChild(errorMessage);
-    } else {
-        var button = document.getElementById("button");
-        button.disabled = false;
-        montantInput.style.borderColor = "";
-        montantInput.style.backgroundColor = ""; // remove background color
-
-        // Remove error message if it exists
-        var errorMessage = montantInput.parentElement.querySelector(".error");
-        if (errorMessage) {
-            errorMessage.remove();
+                // Remove error message if it exists
+                var errorMessage = montantInput.parentElement.querySelector(".error");
+                if (errorMessage) {
+                    errorMessage.remove();
+                }
+            }
         }
-    }
-}
-
 
         var montantInput = document.getElementById("montant");
         montantInput.addEventListener("input", checkMontant);
 
-
-
         var creditSelect = document.getElementById("credit-select");
         creditSelect.addEventListener("change", updateRemainingBalance);
+        var currentDate = new Date().toISOString().split("T")[0];
+        document.getElementById("date_remboursement").value = currentDate;
     </script>
 @endsection
