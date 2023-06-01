@@ -94,6 +94,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/credit/add', [CreditController::class, 'store'])->name('post.credit.add');
         Route::get('/remboursement/add',  [remboursementController::class, 'index'])->name('remboursement.add');
         Route::post('/remboursement/add', [remboursementController::class, 'store'])->name('post.remboursement.add');
+        Route::get('/remboursement/add/credits/{id}/reste', [remboursementController::class, 'getRemainingBalance']);
+
         /* End add */
         Route::get('/generate-pdf', [ChartsController::class, 'generatePDF']);
 
@@ -130,6 +132,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/remboursement/update/{id}', [remboursementController::class, 'update'])->name('post.remboursement.edit');
         Route::get('/remboursement/show', [remboursementController::class, 'show'])->name('remboursement.show');
         Route::get('/remboursement/pdf/{path}', [remboursementController::class, 'viewPdf'])->name('viewPdf');
+        Route::get('/remboursement/add/credits/{id}/reste', [remboursementController::class, 'getRemainingBalance']);
 
         /* End Remboursements */
     });
@@ -140,33 +143,23 @@ Route::middleware('auth')->group(function () {
         Route::get('/document/add',  [DocumentController::class, 'index'])->name('document.add');
         Route::post('/document/add', [DocumentController::class, 'add'])->name('post.document.add');
         /* End approuve */
+         /* start doc */
+
+        Route::get('/document/edit/{id}', [DocumentController::class, 'edit'])->name('document.edit');
+        Route::delete('/document/delete/{id}', [DocumentController::class, 'destroy'])->name('document.delete');
+        Route::put('/document/update/{id}', [DocumentController::class, 'update'])->name('post.document.edit');
+        Route::get('/document/show', [DocumentController::class, 'show'])->name('document.show');
+        Route::get('/document/pdf/{path}', [DocumentController::class, 'viewPdf'])->name('viewPdf');
+
+    /* end doc */
     });
 
 
-    /* start doc */
-
-    Route::get('/document/edit/{id}', [DocumentController::class, 'edit'])->name('document.edit');
-    Route::delete('/document/delete/{id}', [DocumentController::class, 'destroy'])->name('document.delete');
-    Route::put('/document/update/{id}', [DocumentController::class, 'update'])->name('post.document.edit');
-    Route::get('/document/show', [DocumentController::class, 'show'])->name('document.show');
-    Route::get('/document/pdf/{path}', [DocumentController::class, 'viewPdf'])->name('viewPdf');
-
-    /* end doc */
+   
 
 
 
     Route::get('/home', [ChartsController::class, 'chart'])->name('charts');
 
-
-
-
-    Route::get('/remboursement/add/credits/{id}/reste', [remboursementController::class, 'getRemainingBalance']);
-
-
-
-
-
-
-    //profile 
 
 });
