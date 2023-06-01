@@ -85,13 +85,15 @@ class DepenseController extends Controller
             'feuille' => 'mimes:pdf',
             'designation' => 'required|max:1000',
         ]);
-        $solde = Solde::find("1");
-        if ($request->modepaiement == "1") {
-            if ($solde->banque - $request->montant < 0)
-                return back()->withError('Solde banque insuffisant.');
-        } else {
-            if ($solde->caisse - $request->montant < 0)
-                return back()->withError('Solde caisse insuffisant.');
+        if (request('modepaiement')) {
+            $solde = Solde::find("1");
+            if ($request->modepaiement == "1") {
+                if ($solde->banque - $request->montant < 0)
+                    return back()->withError('Solde banque insuffisant.');
+            } else {
+                if ($solde->caisse - $request->montant < 0)
+                    return back()->withError('Solde caisse insuffisant.');
+            }
         }
         $depense = Depense::find($id);
         // Check if Depense has been approved
@@ -100,7 +102,8 @@ class DepenseController extends Controller
         }
         $depense->designation = $request->designation;
         $depense->montant = $request->montant;
-        $depense->modepaiement = $request->modepaiement;
+        if (request('modepaiement'))
+            $depense->modepaiement = $request->modepaiement;
         $depense->rubrique_id = $request->rubrique;
         $depense->user_id = auth()->id();
 

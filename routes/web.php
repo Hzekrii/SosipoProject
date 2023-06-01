@@ -74,7 +74,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/approuve/remboursement/{id}', [ApprouveremboursementController::class, 'approved'])->name('approuve.remboursement.post');
         Route::delete('/approuve/remboursement/delete/{id}', [ApprouveremboursementController::class, 'destroy'])->name('approuve.remboursement.cancel');
         /* End approuve remboursement*/
-
+        /* Start  documents*/
+        // Route::get('/document/edit/{id}', [DocumentController::class, 'edit'])->name('document.edit');
+        // Route::delete('/document/delete/{id}', [DocumentController::class, 'destroy'])->name('document.delete');
+        // Route::put('/document/update/{id}', [DocumentController::class, 'update'])->name('post.document.edit');
+        // Route::get('/document/show', [DocumentController::class, 'show'])->name('document.show');
+        // Route::get('/document/pdf/{path}', [DocumentController::class, 'viewPdf'])->name('viewPdf');
         // /*  Adherents Start  */
 
 
@@ -82,10 +87,8 @@ Route::middleware('auth')->group(function () {
         // /*  Adherents End  */
         Route::resource('categories', CategorieController::class);
     });
+    Route::middleware(['tresorie'])->group(function () {
 
-    Route::middleware(['isTresorieOrPresident'])->group(function () {
-
-        /* Start add */
         Route::get('/recette/add',  [RecetteController::class, 'create'])->name('recette.add');
         Route::post('/recette/add', [RecetteController::class, 'add'])->name('post.recette.add');
         Route::get('/depense/add',  [DepenseController::class, 'create'])->name('depense.add');
@@ -95,6 +98,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/remboursement/add',  [remboursementController::class, 'index'])->name('remboursement.add');
         Route::post('/remboursement/add', [remboursementController::class, 'store'])->name('post.remboursement.add');
         Route::get('/remboursement/add/credits/{id}/reste', [remboursementController::class, 'getRemainingBalance']);
+    });
+
+    Route::middleware(['isTresorieOrPresident'])->group(function () {
+
+        /* Start add */
+
 
         /* End add */
         Route::get('/generate-pdf', [ChartsController::class, 'generatePDF'])->name('generate.financialRepport');
@@ -137,29 +146,22 @@ Route::middleware('auth')->group(function () {
         /* End Remboursements */
     });
 
-    Route::middleware(['auth', 'secretaire'])->group(function () {
+    Route::middleware(['secretaire'])->group(function () {
 
         /* Start approuve */
         Route::get('/document/add',  [DocumentController::class, 'index'])->name('document.add');
         Route::post('/document/add', [DocumentController::class, 'add'])->name('post.document.add');
-        /* End approuve */
-         /* start doc */
-
-        Route::get('/document/edit/{id}', [DocumentController::class, 'edit'])->name('document.edit');
-        Route::delete('/document/delete/{id}', [DocumentController::class, 'destroy'])->name('document.delete');
-        Route::put('/document/update/{id}', [DocumentController::class, 'update'])->name('post.document.edit');
-        Route::get('/document/show', [DocumentController::class, 'show'])->name('document.show');
-        Route::get('/document/pdf/{path}', [DocumentController::class, 'viewPdf'])->name('viewPdf');
-
-    /* end doc */
     });
+    Route::get('/document/edit/{id}', [DocumentController::class, 'edit'])->name('document.edit');
+    Route::delete('/document/delete/{id}', [DocumentController::class, 'destroy'])->name('document.delete');
+    Route::put('/document/update/{id}', [DocumentController::class, 'update'])->name('post.document.edit');
+    /* End approuve */
+    Route::get('/document/show', [DocumentController::class, 'show'])->name('document.show');
+    Route::get('/document/pdf/{path}', [DocumentController::class, 'viewPdf'])->name('viewPdf');
 
 
-   
 
 
 
     Route::get('/home', [ChartsController::class, 'chart'])->name('charts');
-
-
 });

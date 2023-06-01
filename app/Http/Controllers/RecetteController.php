@@ -117,7 +117,8 @@ class RecetteController extends Controller
         }
         $recette->designation = $request->designation;
         $recette->montant = $request->montant;
-        $recette->modepaiement = $request->modepaiement;
+        if ($request->modepaiement)
+            $recette->modepaiement = $request->modepaiement;
         $recette->rubrique_id = $request->rubrique;
         $recette->user_id = auth()->id();
 

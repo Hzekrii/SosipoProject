@@ -74,16 +74,18 @@
                         </a>
                     </li>
                 @endif
-                <li class="nav-item mt-3">
-                    <a id="loading" onclick="sidebarColor(this); showLoading(event)"
-                        class="nav-link btn btn-gradient-success text-light" href="{{ route('document.show') }}">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-filetype-doc text-light text-lg "></i>
-                        </div>
-                        <span class="nav-link-text ms-1 mt-2 fw-bold">Document </span>
-                    </a>
-                </li>
+                @if (Auth::user()->role_id == '3' || Auth::user()->role_id == '1')
+                    <li class="nav-item mt-3">
+                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                            class="nav-link btn btn-gradient-success text-light" href="{{ route('document.show') }}">
+                            <div
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-filetype-doc text-light text-lg "></i>
+                            </div>
+                            <span class="nav-link-text ms-1 mt-2 fw-bold">Document </span>
+                        </a>
+                    </li>
+                @endif
             </ul>
 
         </div>

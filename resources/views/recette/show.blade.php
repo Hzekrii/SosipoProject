@@ -10,7 +10,7 @@
                 <table id="table-datatable" class="table  table-striped-columns table-hover light-mode-table"
                     style="font-size: 0.9em;">
 
-                    @if (Auth::user()->role_id != '3')
+                    @if (Auth::user()->role_id == '2')
                         <div class="d-flex justify-content-start ms-3 mt-3">
                             <a href="{{ route('recette.add') }}" class="btn btn-success text-light"><i
                                     class="bi bi-plus-circle me-2"></i>Nouveau recette</a>

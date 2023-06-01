@@ -26,7 +26,7 @@ class CategorieController extends Controller
         return view('categories.edit', compact('Categorie'));
     }
 
-    public function update(Request $request,Categorie $category)
+    public function update(Request $request, Categorie $category)
     {
 
         $libelle = $request->input('libelle');
@@ -41,10 +41,11 @@ class CategorieController extends Controller
     }
 
 
-    public function destroy(Categorie $Categorie)
+    public function destroy( $id)
     {
+        $Categorie = Categorie::find($id);
         $Categorie->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Categorie deleted successfully.');
+        return redirect()->back()->with('success', 'Categorie deleted successfully.');
     }
 }

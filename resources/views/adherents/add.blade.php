@@ -47,7 +47,6 @@
                                 <label for="categorie_id" class="form-label">Catégorie</label>
                                 <div class="input-group">
                                     <select name="categorie_id" class="form-select" id="categorie_id">
-                                        <option value="">...</option>
                                         @foreach ($categories as $categorie)
                                             <option value="{{ $categorie->id }}">
                                                 {{ $categorie->libelle }}
@@ -132,8 +131,19 @@
                                                                 </div>
                                                             </form>
                                                         </td>
+                                                        <td>
+                                                            <form id="deleteCategoryForm"
+                                                                action="{{ route('categories.destroy', ['category' => $category->id]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" id="delete-category-btn"
+                                                                    class="btn btn-danger btn-sm">Delete</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
+
                                             </tbody>
                                         </table>
                                     </div>

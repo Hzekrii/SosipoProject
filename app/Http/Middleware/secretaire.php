@@ -17,7 +17,7 @@ class secretaire
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::user()->role_id != "3")
-            return redirect()->route('logout');
+            abort(403);
 
         return $next($request);
     }
