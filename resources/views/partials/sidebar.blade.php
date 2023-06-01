@@ -81,7 +81,7 @@
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-filetype-doc text-light text-lg "></i>
                         </div>
-                        <span class="nav-link-text ms-1 mt-2 fw-bold">Document</span>
+                        <span class="nav-link-text ms-1 mt-2 fw-bold">Document </span>
                     </a>
                 </li>
             </ul>
