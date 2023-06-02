@@ -78,7 +78,7 @@
                                         <div class="mb-3">
                                             <label class="mb-2 text-muted">Uploadez votre avatar</label>
                                             <input id="avatar" type="file" class="form-control" name="avatar"
-                                                value="{{ old('avatar') }}" accept="application/pdf">
+                                                value="{{ old('avatar') }}" accept="image/*">
                                             @error('avatar')
                                                 <div class="error">{{ $message }}</div>
                                             @enderror
