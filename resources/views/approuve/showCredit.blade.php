@@ -10,16 +10,6 @@ use App\Models\Adherent;
         </div>
         <div class="card-body px-4 pt-0 pb-2">
             <div class="table-responsive mt-4">
-                {{-- <div class="container mb-5">
-        @if (session('success'))
-            <div class="alert alert-dismissible alert-info d-flex justify-content-between p-3">
-                <div class="">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <strong> {{ session('success') }}</strong>
-                </div>
-                <a data-bs-dismiss="alert"><i class="fa-solid fa-xmark"></i></a>
-            </div>
-        @endif --}}
                 <table id="table-datatable" class="table table-striped dt-responsive nowrap light-mode-table"
                     style="font-size: 0.9em;">
                     <thead>
@@ -29,7 +19,6 @@ use App\Models\Adherent;
                             <th scope="col">Montant</th>
                             <th scope="col">Mode Paiement</th>
                             <th scope="col">date credit</th>
-                            <th scope="col"></th>
                             <th scope="col">Actions</th>
 
                         </tr>
