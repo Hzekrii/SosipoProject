@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="text-center">
                                             <button type="submit"
-                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Connexion</button>
+                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">S'inscrire</button>
                                         </div>
                                     </form>
                                 </div>
@@ -115,7 +115,7 @@
                                     <p class="mb-4 text-sm mx-auto">
                                         Vous avez déjà un compte ?
                                         <a href="{{ route('login') }}"
-                                            class="text-primary text-gradient font-weight-bold">S'inscrire</a>
+                                            class="text-primary text-gradient font-weight-bold">Connexion</a>
                                     </p>
                                 </div>
                             </div>

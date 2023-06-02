@@ -4,7 +4,7 @@
         <div class="row">
             <div class="card ">
                 <div class="card-body">
-                    <h4 class="card-title">Edit profile</h4>
+                    <h4 class="card-title">Modifier votre profil</h4>
                     <hr>
                     <div class="col">
                         <form class="form-group " action="{{ route('user.update') }}" method="post">

@@ -57,7 +57,7 @@
                             @enderror
                             </div>
                             <div class="mb-3">
-                            <label for="file" class="mb-2 text-muted">File</label>
+                            <label for="file" class="mb-2 text-muted">Fichier</label>
                             <input type="file" name="file" class="form-control" id="file" aria-describedby="emailHelp"
                                 accept="application/pdf">
                             @error('file')

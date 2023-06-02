@@ -25713,6 +25713,10 @@ p {
     background: #111c44;
     color: whitesmoke;
 }
+.dark-version .sidenav {
+    background: #111c44;
+    color: whitesmoke;
+}
 .dark-version .text-dark {
     color: whitesmoke;
 }
@@ -25763,9 +25767,7 @@ p {
     background: #111c44 !important;
 }
 
-.dark-version .sidenav.bg-white {
-    background: #fff !important;
-}
+
 .dark-version .dropdown-item {
     color: #fff !important;
 }
