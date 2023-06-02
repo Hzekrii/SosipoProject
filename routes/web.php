@@ -68,6 +68,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/approuve/credit/{id}', [ApprouveCreditController::class, 'approved'])->name('approuve.credit.post');
         Route::delete('/approuve/credit/delete/{id}', [ApprouveCreditController::class, 'destroy'])->name('approuve.credit.cancel');
         /* End approuve credit*/
+        /* Start approuve user*/
+        Route::get('/approuve/user/show', [UserController::class, 'inApprovedUsers'])->name('approuve.user.show');
+        Route::post('/approuve/user/{id}', [UserController::class, 'approve'])->name('approuve.user.post');
+        Route::delete('/approuve/user/delete/{id}', [UserController::class, 'cancelApprovment'])->name('approuve.user.cancel');
+        /* End approuve user*/
 
         /* Start approuve Depense*/
         Route::get('/approuve/remboursement/show', [ApprouveremboursementController::class, 'index'])->name('approuve.remboursement.show');

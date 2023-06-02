@@ -20,11 +20,18 @@ class RemboursementController extends Controller
     public function index()
     {
         $credits = Credit::get();
+        $incompleteCredits = [];
+        foreach ($credits as $credit) {
+            $remainingBalance =  $credit->montant - $credit->remboursements()->sum('montant');
+            if ($remainingBalance > 0)
+                $incompleteCredits[] = $credit;
+        }
         $data = [
             'title' => $des = 'Ajouter Un Remboursement',
             'description' => $des,
-            'credits' => $credits,
+            'credits' => $incompleteCredits,
         ];
+
         return view('remboursement.add', $data);
     }
 
@@ -35,38 +42,36 @@ class RemboursementController extends Controller
     public function store(Request $request)
     {
 
-            $request->validate([
+        $request->validate([
             'designation' => 'required',
             'credit_id' => 'required',
             'montant' => 'required',
             'date_remboursement' => 'required',
             'feuille' => 'required|file|mimes:pdf',
-            ]);
-            $credit = Credit::find($request->credit_id);
-            $year = Carbon::parse($credit->date_credit)->year;
-            $solde = Solde::where('annee', $year)->firstOrFail();
+        ]);
+        $credit = Credit::find($request->credit_id);
+        $year = Carbon::parse($credit->date_credit)->year;
+        $solde = Solde::where('annee', $year)->firstOrFail();
 
-            $reste = $credit->montant - $credit->remboursements->sum('montant');
-            if ($request->montant > $reste) {
+        $reste = $credit->montant - $credit->remboursements->sum('montant');
+        if ($request->montant > $reste) {
             return back()->withErrors(['montant' => 'Le montant du remboursement ne peut pas être supérieur au reste du crédit.']);
-            }
+        }
 
 
-            $remboursement = new Remboursement();
+        $remboursement = new Remboursement();
 
-            $remboursement->credit_id = $request->credit_id;
-            $remboursement->designation = $request->designation;
-            $remboursement->montant = $request->montant;
-            $remboursement->approuve = false;
-            $remboursement->solde_id = $solde->id;
-            $remboursement->date_remboursement = $request->date_remboursement;
-            $remboursement->feuille = $request->file('feuille')->store(
-                
-            );
-            $remboursement->save();
+        $remboursement->credit_id = $request->credit_id;
+        $remboursement->designation = $request->designation;
+        $remboursement->montant = $request->montant;
+        $remboursement->approuve = false;
+        $remboursement->solde_id = $solde->id;
+        $remboursement->date_remboursement = $request->date_remboursement;
+        $remboursement->feuille = $request->file('feuille')->store();
+        $remboursement->save();
 
-            $success = "Ajout avec succès";
-            return back()->withSuccess($success);
+        $success = "Ajout avec succès";
+        return back()->withSuccess($success);
     }
 
 
@@ -169,10 +174,8 @@ class RemboursementController extends Controller
 
     public function getRemainingBalance($id)
     {
-    $credit = Credit::findOrFail($id);
-    $remainingBalance = $credit->montant - $credit->remboursements()->sum('montant');
-    return response()->json(floatval($remainingBalance));
+        $credit = Credit::findOrFail($id);
+        $remainingBalance = $credit->montant - $credit->remboursements()->sum('montant');
+        return response()->json(floatval($remainingBalance));
     }
-
-
 }

@@ -11,6 +11,8 @@
             color: #333;
             background-color: #f9f9f9;
             line-height: 1.6;
+            text-align: center;
+            /* Center-align all text */
         }
 
         .report-container {
@@ -23,16 +25,25 @@
         }
 
         .report-title {
-            text-align: center;
             font-size: 24px;
             margin-bottom: 40px;
             color: #555;
+        }
+
+        h1,
+        h2,
+        h6 {
+            text-align: center;
+            /* Center-align headings */
         }
 
         h2 {
             margin-top: 40px;
             margin-bottom: 20px;
             font-size: 18px;
+            background-color: yellow;
+            /* Highlight "Recettes" and "Dépenses" sections with yellow background */
+            padding: 8px;
         }
 
         table {
@@ -62,16 +73,16 @@
 
 <body>
     <div class="report-container">
-        <h6 class="report-title">Association des œuvres sociales pour les employés et utilisateurs du port d'Agadir</h6>
+        <span class="report-title">Association des œuvres sociales pour les employés et utilisateurs du port du
+            Safi</span>
         <h1>Rapport Financier pour {{ $year }}</h1>
-        <h5>Conformément aux dispositions de la loi intérieure de l'Association et en coordination avec les membres du
+        <p>Conformément aux dispositions de la loi intérieure de l'Association et en coordination avec les membres du
             bureau, le comité spécial et le contrôleur des finances du ministère compétent, l'administration générale de
             la SOSIPO présente le rapport financier de l'année {{ $year }}, couvrant la période du 1er janvier
-            {{ $year }} au 31
-            décembre {{ $year }}. Le nombre de bénéficiaires dans la ville d'Asfi s'élève à
-            {{ $numberOfAdherents }}, sans compter les
-            retraités.
-        </h5>
+            {{ $year }} au 31 décembre {{ $year }}. Le nombre de bénéficiaires dans la ville d'Asfi
+            s'élève à
+            {{ $numberOfAdherents }}, sans compter les retraités.
+        </p>
 
         <h2>Recettes</h2>
         <table>
@@ -88,7 +99,7 @@
                 @foreach ($recetteData as $recette)
                     <tr>
                         <td>{{ $recette['label'] }}</td>
-                        <td>{{ $recette['amount'] }} DH</td>
+                        <td>{{ $recette['amount'] }} </td>
                     </tr>
                     @php
                         $recetteTotal += $recette['amount'];
@@ -96,7 +107,7 @@
                 @endforeach
                 <tr class="total-row">
                     <td><strong>Total</strong></td>
-                    <td><strong>{{ $recetteTotal }} DH</strong></td>
+                    <td><strong>{{ $recetteTotal }} DH </strong></td>
                 </tr>
             </tbody>
         </table>
@@ -116,7 +127,7 @@
                 @foreach ($depenseData as $depense)
                     <tr>
                         <td>{{ $depense['label'] }}</td>
-                        <td>{{ $depense['amount'] }} DH</td>
+                        <td>{{ $depense['amount'] }} </td>
                     </tr>
                     @php
                         $depenseTotal += $depense['amount'];
@@ -124,7 +135,7 @@
                 @endforeach
                 <tr class="total-row">
                     <td><strong>Total</strong></td>
-                    <td><strong>{{ $depenseTotal }} DH</strong></td>
+                    <td><strong>{{ $depenseTotal }} DH </strong></td>
                 </tr>
             </tbody>
         </table>

@@ -14,7 +14,8 @@
                                     @if (DB::table('remboursements')->where('approuve', false)->count() +
                                             DB::table('credits')->where('approuve', false)->count() +
                                             DB::table('depenses')->where('approuve', false)->count() +
-                                            DB::table('recettes')->where('approuve', false)->count() >
+                                            DB::table('recettes')->where('approuve', false)->count() +
+                                            DB::table('users')->where('approved', false)->count() >
                                             0) animate__animated animate__headShake animate__infinite text-danger
                                     @else
                                         text-light @endif
@@ -86,6 +87,41 @@
                                                           echo $diff;
                                                       } else {
                                                           echo '<p class="text-xs text-secondary mb-0">Tout les recettes sont
+                                                        approuvé.</p>';
+                                                      }
+                                                  @endphp
+                                              </p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </li>
+                              <li class="mb-2">
+                                  <a class="dropdown-item border-radius-md" href="{{ route('approuve.user.show') }}">
+                                      <div class="d-flex py-1">
+                                          <div class="d-flex flex-column justify-content-center">
+                                              <div class="d-flex justify-content-between">
+                                                  <div class="col me-5">
+                                                      <p class="text-sm font-weight-normal mb-1">Utilisateurs </p>
+                                                  </div>
+                                                  <div class="col">
+                                                      <p class="badge text-danger me-auto">
+                                                          {{ DB::table('users')->where('approved', false)->count() }}
+                                                      </p>
+                                                  </div>
+                                              </div>
+
+                                              <p class="text-xs text-secondary mb-0">
+                                                  <i class="fa fa-clock me-1"></i>
+                                                  @php
+                                                      $user = DB::table('users')
+                                                          ->where('approved', false)
+                                                          ->first();
+                                                      if ($user) {
+                                                          $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $user->created_at);
+                                                          $diff = $created_at->diffForHumans();
+                                                          echo $diff;
+                                                      } else {
+                                                          echo '<p class="text-xs text-secondary mb-0">Tout les utitlisateurs sont
                                                         approuvé.</p>';
                                                       }
                                                   @endphp
@@ -184,7 +220,7 @@
                   <li class="nav-item dropdown d-flex mx-3 align-items-center">
                       <a class="nav-link dropdown-toggle text-white font-weight-bold px-0" href="#" role="button"
                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <img src="{{ asset('images/' . Auth::user()->url) }}" style="width:40px;height:40px"
+                          <img src="{{ asset('storage/images/' . Auth::user()->url) }}" style="width:40px;height:40px"
                               class="rounded-circle img-thumbnail me-2" alt="{{ auth()->user()->name }}">
                           <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
                       </a>

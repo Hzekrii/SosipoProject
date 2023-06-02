@@ -60,47 +60,52 @@
                                             class="btn btn-primary pe-2">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal{{ $recette->id }}">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                        <!-- Delete confirmation modal -->
-                                        <div class="modal fade" id="deleteConfirmationModal{{ $recette->id }}"
-                                            tabindex="-1" aria-labelledby="deleteConfirmationModalLabel{{ $recette->id }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title text-dark"
-                                                            id="deleteConfirmationModalLabel{{ $recette->id }}">Confirmer
-                                                            la suppression</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body ">
-                                                        Vous ne pouvez pas supprimer cette recette.
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <div class="row justify-content-end">
-                                                            <div class="col-auto">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Annuler</button>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <form action="{{ route('recette.delete', $recette->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger">Supprimer</button>
-                                                                </form>
+                                        @if ($recette->approuve == false)
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal{{ $recette->id }}">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            <!-- Delete confirmation modal -->
+                                            <div class="modal fade" id="deleteConfirmationModal{{ $recette->id }}"
+                                                tabindex="-1"
+                                                aria-labelledby="deleteConfirmationModalLabel{{ $recette->id }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-dark"
+                                                                id="deleteConfirmationModalLabel{{ $recette->id }}">
+                                                                Confirmer
+                                                                la suppression</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body ">
+                                                            Vous ne pouvez pas supprimer cette recette.
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="row justify-content-end">
+                                                                <div class="col-auto">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Annuler</button>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <form
+                                                                        action="{{ route('recette.delete', $recette->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Supprimer</button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

@@ -86,7 +86,7 @@ class DepenseController extends Controller
             'designation' => 'required|max:1000',
         ]);
         if (request('modepaiement')) {
-            $solde = Solde::find("1");
+            $solde = Solde::where('annee', date('Y'))->first();
             if ($request->modepaiement == "1") {
                 if ($solde->banque - $request->montant < 0)
                     return back()->withError('Solde banque insuffisant.');

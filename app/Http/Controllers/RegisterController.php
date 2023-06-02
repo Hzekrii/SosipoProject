@@ -43,7 +43,7 @@ class RegisterController extends Controller
         $user->password = bcrypt(request('password'));
         $avatar = request('avatar');
         $url1 = $avatar->store('public/images');
-        $url = str_replace("images/", "", $url1);
+        $url = str_replace("public/images", "", $url1);
         $user->url = $url;
         $user->save();
         $success = "Inscription términé avec succes.";

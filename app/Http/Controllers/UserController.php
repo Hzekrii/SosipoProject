@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-use function PHPUnit\Framework\isNull;
-
 class UserController extends Controller
 {
     public function logout()
@@ -61,5 +59,23 @@ class UserController extends Controller
         } else {
             return redirect('/user/edit')->with('error', 'Votre mot de passe n\'est pas correct');
         }
+    }
+    public function inApprovedUsers()
+    {
+        $usersInvalid = User::where('approved', 0)->get();
+        return view('approuve.showUser', compact('usersInvalid'));
+    }
+    public function approve($id)
+    {
+        $user = User::find(request('id'));
+        $user->approved = 1;
+        $user->save();
+        return redirect()->route('approuve.user.show')->with('success', 'L\'utilisateur a été approuvé avec succès');
+    }
+    public function cancelApprovment($id)
+    {
+        $user = User::find(request('id'));
+        $user->delete();
+        return redirect()->route('approuve.user.show')->with('success', 'L\'utilisateur a été supprimé avec succès');
     }
 }

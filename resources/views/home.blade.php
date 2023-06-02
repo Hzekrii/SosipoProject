@@ -13,7 +13,8 @@
                 </select>
                 <noscript><input type="submit" value="Submit"></noscript>
             </form>
-            <a href="{{ route('generate.financialRepport') }}" class="btn btn-success">Get financial report </a>
+            <a href="{{ route('generate.financialRepport') }}" class="btn  " style="background-color: #F9F9F9;">Obtenir le
+                rapport financier</a>
             <div class="bg-gradient-success mb-5 rounded">
                 <div class="row p-5 pb-0">
                     <div class="col-md-3 mb-3">
@@ -21,7 +22,7 @@
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title">Number of Recettes</h5>
+                                        <h5 class="card-title">Nombre de recettes</h5>
                                         <p class="card-text">{{ $data['counts']['numberOfRecettes'] }}</p>
                                     </div>
                                     <div class="col-4 text-end">
@@ -39,7 +40,7 @@
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title">Number of Depenses</h5>
+                                        <h5 class="card-title">Nombre de Depenses</h5>
                                         <p class="card-text">{{ $data['counts']['numberOfDepenses'] }}</p>
                                     </div>
                                     <div class="col-4 text-end">
@@ -57,7 +58,7 @@
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title">Number of Documents</h5>
+                                        <h5 class="card-title">Nombre de Documents</h5>
                                         <p class="card-text">{{ $data['counts']['numberOfDocuments'] }}</p>
                                     </div>
                                     <div class="col-4 text-end">
@@ -75,7 +76,7 @@
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title">Number of Adherents</h5>
+                                        <h5 class="card-title">Nombre de membres adhérents</h5>
                                         <p class="card-text">{{ $data['counts']['numberOfAdherents'] }}</p>
                                     </div>
                                     <div class="col-4 text-end">
@@ -264,7 +265,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">

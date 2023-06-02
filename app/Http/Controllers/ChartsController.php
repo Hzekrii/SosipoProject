@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 
@@ -166,6 +167,7 @@ class ChartsController extends Controller
             ->pluck('count', 'libelle');
         return  $categories;
     }
+
     public function generatePDF()
     {
         // Fetch the recette and depense data
@@ -179,9 +181,8 @@ class ChartsController extends Controller
             'recetteData' => $recetteData,
             'depenseData' => $depenseData,
             'year' => $this->selectedYear,
-            'numberOfAdherents' =>  $numberOfAdherents,
+            'numberOfAdherents' => $numberOfAdherents,
         ];
-
 
         // Load the view file containing the table HTML
         $html = view('pdf.report', $data)->render();
@@ -198,13 +199,13 @@ class ChartsController extends Controller
         // Generate a unique filename for the PDF
         $filename = 'rapport_financier_pour_' . $this->selectedYear . '_' . uniqid() . '.pdf';
 
-        // Save the PDF file to the storage directory
-        Storage::disk('public')->put('pdf/' . $filename, $pdf->output());
-        $file = public_path('storage/pdf/' . $filename);
-        // Return the generated filename for further processing or download
-        $headers = [
-            'Content-Type' => 'application/pdf',
-        ];
-        return response()->download($file, $filename, $headers);
+        // Create the response with PDF content
+        $response = Response::make($pdf->output(), 200);
+
+        // Set the appropriate headers for PDF download
+        $response->header('Content-Type', 'application/pdf');
+        $response->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+
+        return $response;
     }
 }

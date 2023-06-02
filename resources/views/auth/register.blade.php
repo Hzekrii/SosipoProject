@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{{ asset('images/sosipologo.png') }}">
     <title>
-        Sosipo - Registration
+        Sosipo - Inscription
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -38,7 +38,7 @@
                             </div>
                             <div class="card card-plain">
                                 <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Sign In</h4>
+                                    <h4 class="font-weight-bolder">S'inscrire</h4>
                                 </div>
                                 <div class="card-body">
                                     <form method="POST" class="needs-validation" novalidate=""
@@ -103,19 +103,19 @@
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" class="remember" type="checkbox"
                                                 id="remember">
-                                            <label class="form-check-label" for="remember">Remember me</label>
+                                            <label class="form-check-label" for="remember">Se souvenir de moi</label>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit"
-                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign up</button>
+                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Connexion</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
-                                        You already have an account?
+                                        Vous avez déjà un compte ?
                                         <a href="{{ route('login') }}"
-                                            class="text-primary text-gradient font-weight-bold">Sign in</a>
+                                            class="text-primary text-gradient font-weight-bold">S'inscrire</a>
                                     </p>
                                 </div>
                             </div>
