@@ -18,7 +18,7 @@
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-dashboard text-light text-lg"></i>
                         </div>
-                        <span class="nav-link-text ms-1 mt-2 fw-bold">Dashboard</span>
+                        <span class="nav-link-text ms-1 mt-2 fw-bold">Tableau de bord</span>
                     </a>
                 </li>
                 @if (auth()->user()->role_id != '3')

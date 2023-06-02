@@ -35,9 +35,6 @@
                                 <td>{{ $depense->rubrique ? $depense->rubrique->libelle : '' }}</td>
                                 <td>{{ $depense->user->name }}</td>
                                 <td>
-                                    {{-- <a href="{{ asset($depense->feuille) }}" class="btn btn-primary" target="_blank">
-                                        <i class="bi bi-file-earmark-pdf"></i>
-                                    </a> --}}
                                     <a href="{{ url('depense/pdf/' . $depense->feuille) }}" class="btn btn-primary"
                                         target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
                                 </td>

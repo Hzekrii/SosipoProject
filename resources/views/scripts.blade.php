@@ -5,7 +5,13 @@
     <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
     <script src="{{ asset('assets/js/argon-dashboard.js?v=2.0.4') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script
+        src="https://cdn.datatables.net/v/dt/jq-3.6.0/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/datatables.min.js">
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -29,16 +35,36 @@
                     darkMode(darkModeSwitch);
                 }
             });
-     
+
         });
         $(document).ready(function() {
-            $('#table-datatable').DataTable({
-                "paging": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "responsive": true,
+            var table = $('#table-datatable').DataTable({
+                "paging": true, // Enable pagination
+                "searching": true, // Enable search box
+                "ordering": true, // Enable column sorting
+                "info": true, // Show table information
+                "responsive": true, // Enable responsive behavior
+                "lengthMenu": [5, 10, 25, 50], // Set options for the number of records per page
+                "pageLength": 5, // Set the initial number of records per page
+                "order": [], // Disable initial sorting
+                "language": { // Language settings
+                    "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json"
+                },
+                "columnDefs": [ // Custom column definitions
+                    {
+                        "targets": 'no-sort', // Disable sorting for specific columns
+                        "orderable": false
+                    }
+                ],
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+
             });
+
+
+            // Apply the buttons configuration to the DataTable instance
+
         });
     </script>
     <script>
@@ -84,5 +110,44 @@
             }, 70);
         }
     </script>
+    <script>
+        const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
+        const iconSidenav = document.getElementById('iconSidenav');
+        const sidenav = document.getElementById('sidenav-main');
+        let body = document.getElementsByTagName('body')[0];
+        let className = 'g-sidenav-pinned';
 
+        if (iconNavbarSidenav) {
+            iconNavbarSidenav.addEventListener("click", toggleSidenav);
+        }
+
+        if (iconSidenav) {
+            iconSidenav.addEventListener("click", toggleSidenav);
+        }
+
+        function toggleSidenav() {
+            if (body.classList.contains(className)) {
+                body.classList.remove(className);
+                setTimeout(function() {
+                    sidenav.classList.remove('bg-white');
+                }, 100);
+                sidenav.classList.remove('bg-transparent');
+
+            } else {
+                body.classList.add(className);
+                sidenav.classList.add('bg-white');
+                sidenav.classList.remove('bg-transparent');
+                iconSidenav.classList.remove('d-none');
+            }
+        }
+
+        let html = document.getElementsByTagName('html')[0];
+
+        html.addEventListener("click", function(e) {
+            if (body.classList.contains('g-sidenav-pinned') && !e.target.classList.contains(
+                    'sidenav-toggler-line')) {
+                body.classList.remove(className);
+            }
+        });
+    </script>
     <!--  END js cripts  -->

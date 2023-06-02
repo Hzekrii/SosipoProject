@@ -212,8 +212,8 @@
                       <div class="form-check form-switch d-flex align-items-center">
                           <input class="form-check-input" type="checkbox" id="dark-version">
                           <label class="form-check-label ms-2" for="dark-version">
-                              <span class="light-text">Light/</span>
-                              <span class="dark-text">Dark</span>
+                              <span class="light-text">Lumière /</span>
+                              <span class="dark-text">Sombre </span>
                           </label>
                       </div>
                   </li>
@@ -228,7 +228,7 @@
                           <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                           <form action="{{ route('logout') }}" method="post">
                               @csrf
-                              <button class="dropdown-item" type="submit">Logout</button>
+                              <button class="dropdown-item" type="submit">Déconnexion</button>
                           </form>
                       </div>
                   </li>

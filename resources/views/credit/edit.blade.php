@@ -50,7 +50,7 @@
                     id="date_credit" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="file" class="form-label">File</label>
+                <label for="file" class="form-label">Fichier</label>
                 <input type="file" name="file" class="form-control" id="file" aria-describedby="emailHelp" accept="application/pdf">
             </div>
             <button type="submit" class="btn btn-primary">Modifier</button>

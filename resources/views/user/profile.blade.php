@@ -60,7 +60,7 @@
                     <div id="email" class="email">{{ Auth::user()->role->libelle }}</div>
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-primary" href="{{ route('user.edit') }}">Edit Profile</a>
+                    <a class="btn btn-primary" href="{{ route('user.edit') }}">Modifier votre profil</a>
                 </div>
             </div>
 

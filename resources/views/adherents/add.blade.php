@@ -100,7 +100,7 @@
                             <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="allCategoriesModalLabel">All Categories</h5>
+                                        <h5 class="modal-title" id="allCategoriesModalLabel">Toutes les catégories</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -108,14 +108,12 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
                                                     <th scope="col">Libelle</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="categories-table-body">
                                                 @foreach ($categories as $category)
                                                     <tr>
-                                                        <td>{{ $category->id }}</td>
                                                         <td>
                                                             <form id="editCategoryForm"
                                                                 action="{{ route('categories.update', ['category' => $category]) }}"
@@ -127,7 +125,7 @@
                                                                         id="edit-category-libelle"
                                                                         value="{{ $category->libelle }}" name="libelle">
                                                                     <button type="submit" id="update-category-btn"
-                                                                        class="btn btn-primary btn-sm">Update</button>
+                                                                        class="btn btn-primary btn-sm">Modifier</button>
                                                                 </div>
                                                             </form>
                                                         </td>
@@ -138,7 +136,7 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" id="delete-category-btn"
-                                                                    class="btn btn-danger btn-sm">Delete</button>
+                                                                    class="btn btn-danger btn-sm">Supprimer</button>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -158,7 +156,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
+                                        <h5 class="modal-title" id="addCategoryModalLabel">Ajouter une catégorie</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
