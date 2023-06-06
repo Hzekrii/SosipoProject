@@ -53,7 +53,7 @@
                                                 class="form-control @error('email') is-invalid invalid-bg @enderror form-control-lg"
                                                 placeholder="Email" value="{{ old('email') }}" aria-label="Email">
                                             @error('email')
-                                                <div class="text-danger" style="font-size: 14px">{{ $message }}</div>
+                                                <div class="text-danger"> style="font-size: 14px">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -63,7 +63,7 @@
                                                 placeholder="Password" value="{{ old('password') }}"
                                                 aria-label="password">
                                             @error('password')
-                                                <div class="text-danger" style="font-size: 14px">{{ $message }}</div>
+                                                <div class="text-danger"> style="font-size: 14px">{{ $message }}</div>
                                             @enderror
                                         </div>
 

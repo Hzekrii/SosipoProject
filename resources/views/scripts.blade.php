@@ -45,7 +45,7 @@
                 "info": true, // Show table information
                 "responsive": true, // Enable responsive behavior
                 "lengthMenu": [5, 10, 25, 50], // Set options for the number of records per page
-                "pageLength": 5, // Set the initial number of records per page
+                "pageLength": 10, // Set the initial number of records per page
                 "order": [], // Disable initial sorting
                 "language": { // Language settings
                     "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Solde;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -44,12 +45,27 @@ class LoginController extends Controller
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
+            $this->findOrNewSolde();
             return redirect('/home');
         }
 
         return back()->withErrors(['login' => 'Adresse e-mail ou mot de passe incorrect'])->withInput();
     }
+    public function findOrNewSolde()
+    {
+        $currentYear = date('Y');
 
+        // Get the Solde for the current year or create a new one if it doesn't exist
+        $solde = Solde::firstOrNew(['annee' => $currentYear]);
+
+        // Check if the Solde is a new instance
+        if (!$solde->exists) {
+            // Initialize the Solde balances for the new year
+            $solde->banque = 0;
+            $solde->caisse = 0;
+        }
+        $solde->save(); // Save the changes to the database
+    }
 
 
 

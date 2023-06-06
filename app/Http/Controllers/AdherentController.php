@@ -27,14 +27,19 @@ class AdherentController extends Controller
     {
         // Validate the request data
         $validatedData = $request->validate([
-            'matricule' => 'required|unique:adherents',
+            'matricule' => 'required|unique:adherents,matricule',
             'name' => 'required',
             'prenom' => 'required',
-            'cin' => 'required|unique:adherents',
+            'cin' => 'required|unique:adherents,cin',
             'categorie_id' => 'required|exists:categories,id',
-            'nb_enfant' => 'required|integer|min:0',
-            'situation_maritale' => 'nullable|integer|between:1,4',
+            'nb_enfant' => 'required|numeric|min:0',
+            'situation_maritale' => 'required|between:1,4',
+        ], [
+            'nb_enfant.required' => 'Le champ Nombre d\'enfants est obligatoire.',
+            'nb_enfant.integer' => 'Le champ Nombre d\'enfants doit être un entier.',
+            'nb_enfant.min' => 'Le champ Nombre d\'enfants doit être supérieur ou égal à 0.',
         ]);
+
 
         // Create a new Adherent object and fill it with the validated data
         $adherent = new Adherent();

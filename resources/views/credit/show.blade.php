@@ -22,8 +22,9 @@
                             <th scope="col">Montant</th>
                             <th scope="col">Mode Paiement</th>
                             <th scope="col">date credit</th>
-                            <th scope="col">Approuve</th>
+                            <th scope="col">Statut</th>
                             <th scope="col">reste</th>
+                            <th scope="col">Signature</th>
                             <th scope="col">Feuille</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -31,7 +32,7 @@
                     <tbody>
                         @foreach ($credits as $credit)
                             <tr>
-                                <td>{{ $credit->adherent->name }}</td>
+                                <td> {{ $credit->adherent->matricule }} - {{ $credit->adherent->name }} {{ $credit->adherent->prenom }}</td>
                                 <td>{{ $credit->designation }}</td>
                                 <td>{{ $credit->montant }}</td>
                                 <td>
@@ -52,27 +53,25 @@
                                         <span class="badge bg-warning text-dark">En attente</span>
                                     @endif
                                 </td>
-
-                                @if ($credit->approuve)
-                                    <td>
+                                <td>
+                                    @if ($credit->approuve)
                                         @foreach ($restes as $reste)
                                             @if ($reste['credit'] == $credit->id)
-                                                @if ($reste['reste'] > 0)
-                                                    {{ $reste['reste'] }}
-                                                @else
-                                                    {{ 0 }}
-                                                @endif
+                                                {{ $reste['reste'] > 0 ? $reste['reste'] : 0 }}
                                             @endif
                                         @endforeach
-                                    </td>
-                                @else
-                                    {{ 'No Credit Exists Yet' }}
-                                @endif
+                                    @else
+                                        En attente
+                                    @endif
+                                </td>
 
+                                <td>
+                                    {{ $credit->user->name }}
+                                </td>
                                 {{-- <td>{{ $credit->user->name }}</td> --}}
                                 <td>
-                                    <a href="{{ url('credit/pdf/' . $credit->file) }}" class="btn btn-primary"
-                                        target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                                    <a href="{{ url('credit/pdf/' . $credit->file) }}" class="btn btn-primary"><i
+                                            class="bi bi-file-earmark-pdf"></i></a>
                                 </td>
                                 <td>
                                     @if ($credit->approuve)
@@ -120,13 +119,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
-
-
                                 </td>
                             </tr>
                         @endforeach

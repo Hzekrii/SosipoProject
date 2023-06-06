@@ -22,7 +22,7 @@
                                 <label for="designation" class="mb-2 text-muted">Designation</label>
                                 <input type="text" name="designation" class="form-control" id="designation">
                                 @error('designation')
-                                    <div class="error">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -40,7 +40,7 @@
                                     @endforeach
                                 </select>
                                 @error('credit_id')
-                                    <div class="error">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3 reste">
@@ -52,7 +52,7 @@
                                 <label for="montant" class="mb-2 text-muted">Montant</label>
                                 <input type="number" name="montant" class="form-control" min="0" id="montant">
                                 @error('montant')
-                                    <div class="error">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -62,7 +62,7 @@
                                 <input type="date" name="date_remboursement" class="form-control"
                                     id="date_remboursement">
                                 @error('date_remboursement')
-                                    <div class="error">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -71,7 +71,7 @@
                                 <input type="file" name="feuille" class="form-control" id="feuille"
                                     accept="application/pdf">
                                 @error('feuille')
-                                    <div class="error">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <button type="submit" id="button" class="btn btn-primary">Envoyer</button>

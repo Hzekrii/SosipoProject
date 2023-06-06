@@ -15,7 +15,7 @@
                                 <input id="matricule" type="text" class="form-control" name="matricule"
                                     value="{{ old('matricule') }}" required autofocus>
                                 @error('matricule')
-                                    <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">>{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -23,7 +23,7 @@
                                 <input id="name" type="text" class="form-control" name="name"
                                     value="{{ old('name') }}" required>
                                 @error('name')
-                                    <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">>{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -31,7 +31,7 @@
                                 <input id="prenom" type="text" class="form-control" name="prenom"
                                     value="{{ old('prenom') }}" required>
                                 @error('prenom')
-                                    <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">>{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -39,7 +39,7 @@
                                 <input id="cin" type="text" class="form-control" name="cin"
                                     value="{{ old('cin') }}" required>
                                 @error('cin')
-                                    <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">>{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -62,7 +62,7 @@
                                 </div>
 
                                 @error('categorie_id')
-                                    <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">>{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -70,7 +70,7 @@
                                 <input id="nb_enfant" type="number" min="0" class="form-control" name="nb_enfant"
                                     value="{{ old('nb_enfant') }}" required>
                                 @error('nb_enfant')
-                                    <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">>{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -85,7 +85,7 @@
                                     </select>
                                 </div>
                                 @error('situation_maritale')
-                                    <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">>{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="align-items-center d-flex">

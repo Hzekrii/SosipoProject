@@ -10,7 +10,7 @@ use App\Models\Adherent;
         </div>
         <div class="card-body px-4 pt-0 pb-2">
             <div class="table-responsive mt-4">
-              
+
                 <table id="table-datatable" class="table table-striped dt-responsive nowrap light-mode-table"
                     style="font-size: 0.9em;">
                     <thead>
@@ -20,7 +20,8 @@ use App\Models\Adherent;
                             <th scope="col">Montant</th>
                             <th scope="col">Mode Paiement</th>
                             <th scope="col">date credit</th>
-                            <th scope="col"></th>
+                            <th scope="col">Feuille</th>
+                            <th scope="col">Signature</th>
                             <th scope="col">Actions</th>
 
                         </tr>
@@ -38,8 +39,13 @@ use App\Models\Adherent;
                                         Banque
                                     @endif
                                 </td>
-                                <td>{{ $credit->date_credit }}</td>
 
+                                <td>{{ $credit->date_credit }}</td>
+                                <td>
+                                    <a href="{{ url('credit/pdf/' . $credit->file) }}" class="btn btn-primary"><i
+                                            class="bi bi-file-earmark-pdf"></i></a>
+                                </td>
+                                <td>{{ $credit->user->name }}</td>
                                 <td>
                                     <button type="button" class="btn btn-info mx-1" data-bs-toggle="modal"
                                         data-bs-target="#approveConfirmationModal{{ $credit->id }}">

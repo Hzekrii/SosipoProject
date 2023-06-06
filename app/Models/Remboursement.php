@@ -16,4 +16,7 @@ class Remboursement extends Model
     public function solde(){
         return $this->belongsTo(Solde::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

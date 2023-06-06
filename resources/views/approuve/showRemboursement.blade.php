@@ -10,7 +10,7 @@ use App\Models\Adherent;
         </div>
         <div class="card-body px-4 pt-0 pb-2">
             <div class="table-responsive mt-4">
-           
+
                 <table id="table-datatable" class="table rounded  table-striped-columns table-hover  light-mode-table"
                     style="font-size: 0.9em;">
                     <thead>
@@ -20,6 +20,7 @@ use App\Models\Adherent;
                             <th scope="col">Montant</th>
                             <th scope="col">date remboursement</th>
                             <th scope="col">Feuille</th>
+                            <th scope="col">Signature</th>
                             <th scope="col">Actions</th>
 
                         </tr>
@@ -32,6 +33,7 @@ use App\Models\Adherent;
                                 <td>{{ $remboursement->montant }}</td>
 
                                 <td>{{ $remboursement->date_remboursement }}</td>
+                                <td>{{ $remboursement->user->name }}</td>
                                 <td>
                                     <a href="{{ url('remboursement/pdf/' . $remboursement->feuille) }}"
                                         class="btn btn-primary" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>

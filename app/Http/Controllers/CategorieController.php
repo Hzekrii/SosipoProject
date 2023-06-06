@@ -46,6 +46,6 @@ class CategorieController extends Controller
         $Categorie = Categorie::find($id);
         $Categorie->delete();
 
-        return redirect()->back()->with('success', 'Categorie deleted successfully.');
+        return back()->with('success', 'Categorie deleted successfully.');
     }
 }

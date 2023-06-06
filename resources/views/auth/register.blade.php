@@ -51,7 +51,7 @@
                                                 placeholder="Nom complet ici" value="{{ old('name') }}" required
                                                 autofocus>
                                             @error('name')
-                                                <div class="error">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="mb-3">
@@ -59,19 +59,21 @@
                                                 placeholder="Email" value="{{ old('email') }}" aria-label="Email">
                                         </div>
                                         @error('email')
-                                            <div class="text-danger">{{ $message }}</div>
+                                            <div class="text-danger">>{{ $message }}</div>
                                         @enderror
 
                                         <div class="mb-3">
                                             <select name="role" class="form-control" id="#roleid">
-                                                <option value="0" class="text-muted">Veuillez sélectionner le rôle
+                                                <option value="0" class="text-muted">Veuillez sélectionner le
+                                                    rôle
                                                 </option>
                                                 @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->libelle }}</option>
+                                                    <option value="{{ $role->id }}">{{ $role->libelle }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('role')
-                                                <div class="error">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -80,7 +82,7 @@
                                             <input id="avatar" type="file" class="form-control" name="avatar"
                                                 value="{{ old('avatar') }}" accept="image/*">
                                             @error('avatar')
-                                                <div class="error">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="mb-3">
@@ -89,7 +91,7 @@
                                                 aria-label="password">
                                         </div>
                                         @error('password')
-                                            <div class="text-danger">{{ $message }}</div>
+                                            <div class="text-danger">>{{ $message }}</div>
                                         @enderror
                                         <div class="mb-3">
                                             <input type="password" name="password_confirmation"
@@ -98,12 +100,13 @@
                                                 value="{{ old('password_confirmation') }}" aria-label="password">
                                         </div>
                                         @error('password_confirmation')
-                                            <div class="text-danger">{{ $message }}</div>
+                                            <div class="text-danger">>{{ $message }}</div>
                                         @enderror
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" class="remember" type="checkbox"
                                                 id="remember">
-                                            <label class="form-check-label" for="remember">Se souvenir de moi</label>
+                                            <label class="form-check-label" for="remember">Se souvenir de
+                                                moi</label>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit"

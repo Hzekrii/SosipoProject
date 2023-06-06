@@ -32,7 +32,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="rubrique" class="form-label">Role</label>
+                                <label for="rubrique" class="form-label">Rubrique</label>
                                 <select name="rubrique" class="form-select" id="rubrique">
                                     @foreach ($rubriques as $rubrique)
                                         <option value="{{ $rubrique->id }}"
@@ -67,7 +67,7 @@
                                 <input id="feuille" type="file" class="form-control" name="feuille"
                                     value="{{ old('feuille') }}">
                                 @error('feuille')
-                                    <div class="error">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 

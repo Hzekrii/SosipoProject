@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->double('montant');
             $table->integer('modepaiement');
             $table->boolean('approuve');
+            $table->foreignId('user_id')->constrained('users')->default('2');
             $table->date('date_credit');
             $table->string('file');
             $table->foreignId('solde_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
