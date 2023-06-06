@@ -10,7 +10,6 @@ use App\Models\Adherent;
         </div>
         <div class="card-body px-4 pt-0 pb-2">
             <div class="table-responsive mt-4">
-
                 <table id="table-datatable" class="table table-striped dt-responsive nowrap light-mode-table"
                     style="font-size: 0.9em;">
                     <thead>
@@ -23,7 +22,6 @@ use App\Models\Adherent;
                             <th scope="col">Feuille</th>
                             <th scope="col">Signature</th>
                             <th scope="col">Actions</th>
-
                         </tr>
                     </thead>
                     <tbody>
