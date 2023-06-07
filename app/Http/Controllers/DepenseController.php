@@ -43,13 +43,13 @@ class DepenseController extends Controller
             'designation' => 'required|max:1000',
         ]);
         $solde = Solde::find("1");
-        if ($request->modepaiement == "1") {
-            if ($solde->banque - $request->montant < 0)
-                return back()->withError('Solde banque insuffisant.');
-        } else {
-            if ($solde->caisse - $request->montant < 0)
-                return back()->withError('Solde caisse insuffisant.');
-        }
+        // if ($request->modepaiement == "1") {
+        //     if ($solde->banque - $request->montant < 0)
+        //         return back()->withError('Solde banque insuffisant.');
+        // } else {
+        //     if ($solde->caisse - $request->montant < 0)
+        //         return back()->withError('Solde caisse insuffisant.');
+        // }
         $depense = new Depense;
         $depense->designation = $request->designation;
         $depense->montant = $request->montant;

@@ -50,14 +50,6 @@ class RecetteController extends Controller
         // Find the corresponding rubrique based on the input
         $rubrique = Rubrique::find($request->rubrique);
 
-        // If the rubrique is for "Augmentation de la banque"
-        if ($rubrique->libelle == "Augmentation de la banque") {
-            // Check if the year has already been entered in Solde
-            if (Solde::first()->annee == date('Y')) {
-                // Redirect with an error message
-                return redirect('recette/show')->with('error', 'L’année a déjà été saisie dans Solde.');
-            }
-        }
 
         // Create a new Recette instance
         $recette = new Recette;
@@ -108,13 +100,7 @@ class RecetteController extends Controller
         $rubrique = Rubrique::find($request->rubrique);
 
         // If the rubrique is for "Augmentation de la banque"
-        if ($rubrique->libelle == "Augmentation de la banque") {
-            // Check if the year has already been entered in Solde
-            if (Solde::first()->annee == date('Y')) {
-                // Redirect with an error message
-                return redirect('recette/show')->with('error', 'L’année a déjà été saisie dans Solde.');
-            }
-        }
+
         $recette->designation = $request->designation;
         $recette->montant = $request->montant;
         if ($request->modepaiement)

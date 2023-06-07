@@ -3,7 +3,7 @@
 @section('content')
     <style>
         .card {
-            width: 300px;
+            max-width: 300px;
             margin: 0 auto;
             margin-top: 50px;
             border-radius: 10px;
@@ -48,23 +48,22 @@
             cursor: pointer;
         }
     </style>
-    <div class="container"></div>
-    <div class="row ">
-        <div class="col-6 mx-auto ">
-            <div class="card">
-                <div class="card-header">
-                    <img id="profile-picture" class="profile-picture" width="100px" height="100px"
-                        src="{{ asset('images/' . Auth::user()->url) }}" alt="Profile Picture">
-                    <div id="name" class="name">{{ Auth::user()->name }}</div>
-                    <div id="email" class="email">{{ Auth::user()->email }}</div>
-                    <div id="email" class="email">{{ Auth::user()->role->libelle }}</div>
-                </div>
-                <div class="card-body">
-                    <a class="btn btn-primary" href="{{ route('user.edit') }}">Modifier votre profil</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <img id="profile-picture" class="profile-picture" width="100px" height="100px"
+                            src="{{ asset('storage/images/' . Auth::user()->url) }}" alt="Profile Picture">
+                        <div id="name" class="name">{{ Auth::user()->name }}</div>
+                        <div id="email" class="email">{{ Auth::user()->email }}</div>
+                        <div id="email" class="email">{{ Auth::user()->role->libelle }}</div>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-primary" href="{{ route('user.edit') }}">Modifier votre profil</a>
+                    </div>
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
 @endsection

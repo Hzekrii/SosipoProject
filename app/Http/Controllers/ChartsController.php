@@ -28,17 +28,14 @@ class ChartsController extends Controller
     }
     public function chart(Request $request)
     {
-        $this->selectedYear = request('year');
-        if (!$this->selectedYear) {
+        $this->selectedYear = $request->input('year', Carbon::now()->year);
 
-            $this->selectedYear = Carbon::now()->year;
-        }
         // Fetch the recette and depense rubrique data
         $recetteRubrique = $this->recetteRubrique();
         $depenseRubrique = $this->depenseRubrique();
+
         // Prepare the chart data
         $data = [
-            // 'solde' => $this->soldeStatistics(),
             'recetteRubrique' => $recetteRubrique,
             'depenseRubrique' => $depenseRubrique,
             'counts' => $this->count(),
@@ -46,7 +43,12 @@ class ChartsController extends Controller
             'selectedYear' => $this->selectedYear,
             'years' => $this->years(),
             'categories' => $this->adherentBycategory(),
+           
         ];
+
+        // Fill the data for other months
+        $data['monthlyData'] = $this->getMonthlyDepencesAndRecettes();
+        $data['monthlyData'] = $this->fillMissingMonths($data['monthlyData']);
 
         // Pass the chart data to the view
         return view('home', compact('data'));
@@ -55,15 +57,73 @@ class ChartsController extends Controller
     public function getTotalDepencesAndRecettes()
     {
         // Revenue $
-        $totalRevenue = Recette::whereYear('created_at', $this->selectedYear)->sum('montant');
-        $totalRevenue += Remboursement::whereYear('created_at', $this->selectedYear)->sum('montant');
+        $totalRevenue = Recette::whereYear('created_at', $this->selectedYear)
+            ->where('approuve', true)
+            ->sum('montant');
+        $totalRevenue += Remboursement::whereYear('date_remboursement', $this->selectedYear)
+            ->where('approuve', true)
+            ->sum('montant');
 
         // Expenses $
-        $totalExpenses = Depense::whereYear('created_at', $this->selectedYear)->sum('montant');
-        $totalExpenses += Credit::whereYear('created_at', $this->selectedYear)->sum('montant');
+        $totalExpenses = Depense::whereYear('created_at', $this->selectedYear)
+            ->where('approuve', true)
+            ->sum('montant');
+        $totalExpenses += Credit::whereYear('date_credit', $this->selectedYear)
+            ->where('approuve', true)
+            ->sum('montant');
 
         return compact('totalExpenses', 'totalRevenue');
     }
+
+    public function fillMissingMonths($data)
+    {
+        $filledData = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $filledData[$month] = $data[$month] ?? ['totalExpenses' => 0, 'totalRevenue' => 0];
+        }
+
+        return $filledData;
+    }
+
+    public function getMonthlyDepencesAndRecettes()
+    {
+        $monthlyData = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $totalRevenue = Recette::whereMonth('created_at', $month)
+                ->whereYear('created_at', $this->selectedYear)
+                ->where('approuve', true)
+                ->sum('montant');
+
+            $totalRevenue += Remboursement::whereMonth('date_remboursement', $month)
+                ->whereYear('date_remboursement', $this->selectedYear)
+                ->where('approuve', true)
+                ->sum('montant');
+
+            $totalExpenses = Depense::whereMonth('created_at', $month)
+                ->whereYear('created_at', $this->selectedYear)
+                ->where('approuve', true)
+                ->sum('montant');
+
+            $totalExpenses += Credit::whereMonth('date_credit', $month)
+                ->whereYear('date_credit', $this->selectedYear)
+                ->where('approuve', true)
+                ->sum('montant');
+
+            $monthlyData[$month] = [
+                'totalExpenses' => $totalExpenses,
+                'totalRevenue' => $totalRevenue,
+            ];
+        }
+
+        return $monthlyData;
+    }
+
+
+
+
+
 
     // public function soldeStatistics()
     // {
@@ -96,7 +156,7 @@ class ChartsController extends Controller
         $rubriques = Rubrique::where('for', false)->get();
         $data = [];
         foreach ($rubriques as $rubrique) {
-            if ($rubrique->libelle !== 'Augmentation de la banque') {
+            if ($rubrique->id !== 1) {
                 $amount = Recette::whereYear('created_at', $this->selectedYear)->where('rubrique_id', $rubrique->id)->where('approuve', true)->sum('montant');
                 $data[] = ['label' => $rubrique->libelle, 'amount' => $amount];
             }
@@ -134,7 +194,6 @@ class ChartsController extends Controller
                 $incompleteCredits++;
             }
         }
-
         $solde = Solde::where('annee', $this->selectedYear)->first();
         $banqueSolde = $solde->banque;
         $caisseSolde = $solde->caisse;

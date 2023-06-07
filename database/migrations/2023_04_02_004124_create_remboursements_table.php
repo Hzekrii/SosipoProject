@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->text('designation')->nullable();
             $table->double('montant');
             $table->boolean('approuve');
+            $table->foreignId('user_id')->constrained('users')->default('2');
             $table->date('date_remboursement');
             $table->string('feuille');
             $table->foreignId('solde_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

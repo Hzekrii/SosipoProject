@@ -33,7 +33,7 @@ class ApprouveRecettteController extends Controller
         } else  $solde->caisse += $recette->montant;
         $solde->save();
         $recette->save();
-        return redirect()->route('approuve.recette.show')->withSuccess('La recette aprouvé avec succes.');
+        return back()->withSuccess('La recette aprouvé avec succes.');
     }
 
 

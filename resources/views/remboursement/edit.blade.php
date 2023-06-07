@@ -20,7 +20,7 @@
                                 <input type="text" name="designation" value="{{ $remboursement->designation }}"
                                     class="form-control" id="designation" aria-describedby="emailHelp">
                                 @error('designation')
-                                    <div class="error"> {{ $message }}</div>
+                                    <div class="text-danger"> {{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                                 @error('credit_id')
-                                    <div class="error"> {{ $message }}</div>
+                                    <div class="text-danger"> {{ $message }}</div>
                                 @enderror
 
                             </div>
@@ -42,7 +42,7 @@
                                 <input type="number" name="montant" class="form-control"
                                     value="{{ $remboursement->montant }}" id="montant" aria-describedby="emailHelp">
                                 @error('montant')
-                                    <div class="error"> {{ $message }}</div>
+                                    <div class="text-danger"> {{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -57,7 +57,7 @@
                                 <input type="file" name="feuille" class="form-control" id="feuille"
                                     aria-describedby="emailHelp">
                                 @error('feuille')
-                                    <div class="error"> {{ $message }}</div>
+                                    <div class="text-danger"> {{ $message }}</div>
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>

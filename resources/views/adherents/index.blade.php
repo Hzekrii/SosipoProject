@@ -61,24 +61,23 @@
                                 </td>
 
                                 <td>
-                                    <div class="btn-group">
-                                        <a href="{{ route('adherents.show', $adherent) }}" class="btn btn-sm btn-primary"
-                                            title="Afficher">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="{{ route('adherents.edit', $adherent) }}" class="btn btn-sm btn-warning"
-                                            title="Modifier">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <form action="{{ route('adherents.destroy', $adherent) }}" method="POST"
-                                            onsubmit="return confirm('Êtes-vous sûr ?')" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    <a href="{{ route('adherents.show', $adherent) }}" class="btn btn-sm btn-primary"
+                                        title="Afficher">
+                                        <i class="bi bi-eye bi-3x"></i>
+                                    </a>
+                                    <a href="{{ route('adherents.edit', $adherent) }}" class="btn btn-sm btn-warning"
+                                        title="Modifier">
+                                        <i class="bi bi-pencil bi-3x"></i>
+                                    </a>
+                                    <form action="{{ route('adherents.destroy', $adherent) }}" method="POST"
+                                        onsubmit="return confirm('Êtes-vous sûr ?')" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
+                                            <i class="bi bi-trash bi-3x"></i>
+                                        </button>
+                                    </form>
+                                    
                                 </td>
                             </tr>
                         @endforeach
@@ -87,8 +86,4 @@
             </div>
         </div>
     </div>
-
-
-
-
 @endsection

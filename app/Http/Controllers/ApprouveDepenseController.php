@@ -57,7 +57,7 @@ class ApprouveDepenseController extends Controller
         $depense->save();
 
         // Redirect to the same page with a success message
-        return redirect()->route('approuve.depense.show')->withSuccess('La depense approuvé avec succès.');
+        return back()->withSuccess('La depense approuvé avec succès.');
     }
 
     public function destroy($id)

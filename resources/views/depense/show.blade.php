@@ -21,7 +21,7 @@
                             <th>Montant</th>
                             <th>Mode de paiement</th>
                             <th>Rubrique</th>
-                            <th>Approve</th>
+                            <th>Statut</th>
                             <th>Rédigé par</th>
                             <th>Feuille</th>
                             <th>Actions</th>
@@ -51,7 +51,7 @@
                                 <td>{{ $depense->user->name }}</td>
                                 <td>
                                     <a href="{{ url('depense/pdf/' . $depense->feuille) }}" class="btn btn-primary"
-                                        target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                                        ><i class="bi bi-file-earmark-pdf"></i></a>
                                 </td>
                                 <td>
                                     <a href="{{ route('depense.edit', ['id' => $depense->id]) }}"

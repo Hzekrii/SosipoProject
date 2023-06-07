@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Credit;
 use App\Models\Adherent;
 use Illuminate\Http\Request;
@@ -39,15 +40,16 @@ class ApprouveCreditController extends Controller
         $credit->approuve = true;
 
         // Get the Solde with id "1"
-        $solde = Solde::where('annee',date('Y'))->get()->first();
+        $solde = Solde::where('annee', date('Y'))->get()->first();
 
         // Check the mode of payment for the Depense
         if ($credit->modepaiement == "1") {
 
             // Subtract the credit amount from the bank balance
+
             $solde->banque -= $credit->montant;
         } else {
-            
+
             // Subtract the credit amount from the cash balance
             $solde->caisse -= $credit->montant;
         }
@@ -57,7 +59,7 @@ class ApprouveCreditController extends Controller
         $credit->save();
 
         // Redirect to the same page with a success message
-        return redirect()->route('approuve.credit.show')->withSuccess('Le Crédit approuvé avec succès.');
+        return back()->withSuccess('Le Crédit approuvé avec succès.');
     }
 
     public function destroy($id)

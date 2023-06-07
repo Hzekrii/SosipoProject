@@ -18,7 +18,7 @@
             <div class="bg-gradient-success mb-5 rounded">
                 <div class="row p-5 pb-0">
                     <div class="col-md-3 mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -28,7 +28,7 @@
                                     <div class="col-4 text-end">
                                         <div
                                             class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
-                                            <i class="fas fa-line-chart text-lg opacity-10"></i>
+                                            <i class="fas fa-chart-line text-lg opacity-10"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -36,11 +36,11 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title">nombre de Depenses</h5>
+                                        <h5 class="card-title">nombre de Dépenses</h5>
                                         <p class="card-text">{{ $data['counts']['numberOfDepenses'] }}</p>
                                     </div>
                                     <div class="col-4 text-end">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -92,7 +92,7 @@
                 </div>
                 <div class="row p-5 pt-1">
                     <div class="col-md-3 mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -120,7 +120,7 @@
                                     <div class="col-4 text-end">
                                         <div
                                             class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
-                                            <i class="fas fa-users text-lg opacity-10"></i>
+                                            <i class="fas fa-money-bill text-lg opacity-10"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -138,18 +138,17 @@
                                     <div class="col-4 text-end">
                                         <div
                                             class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
-                                            <i class="fas fa-users text-lg opacity-10"></i>
+                                            <i class="fas fa-user-times text-lg opacity-10"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="row p-5 pt-1">
                     <div class="col mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -159,7 +158,7 @@
                                     <div class="col-4 text-end">
                                         <div
                                             class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
-                                            <i class="fas fa-users text-lg opacity-10"></i>
+                                            <i class="fas fa-money-bill-alt text-lg opacity-10"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +166,7 @@
                         </div>
                     </div>
                     <div class="col mb-3">
-                        <div class="card h-100 ">
+                        <div class="card h-100">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-8">
@@ -177,7 +176,7 @@
                                     <div class="col-4 text-end">
                                         <div
                                             class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
-                                            <i class="fas fa-users text-lg opacity-10"></i>
+                                            <i class="fas fa-money-bill-wave-alt text-lg opacity-10"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -186,6 +185,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="row p-5">
             <div class="col mb-3">
@@ -246,7 +246,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Recette par rubrique
+                        <h5> Recette par rubrique</h5>
                     </div>
                     <div class="card-body">
                         <canvas id="recette-chart"></canvas>
@@ -256,7 +256,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Dépenses par rubrique
+                        <h5> Dépenses par rubrique</h5>
                     </div>
                     <div class="card-body">
                         <canvas id="depense-chart"></canvas>
@@ -269,17 +269,27 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Adherent par categorie
+                        <h5>Évolution des dépenses et des revenus mensuels en {{ $year }}</h5>
                     </div>
                     <div class="card-body">
-                        <canvas id="adherents-chart" width="400" height="400"></canvas>
+                        <canvas id="monthlyChart"></canvas>
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Adhérents par catégorie</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="adherents-chart"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        </div>
+
+
 
         <style>
             .card {
@@ -437,6 +447,8 @@
                         '#FF6384',
                         '#36A2EB',
                         '#FFCE56',
+                        '#FFEE11',
+                        '#FFC456',
                         // Add more colors as needed
                     ],
                 }],
@@ -447,6 +459,50 @@
                 type: 'pie', // or 'bar' for a bar chart
                 data: data,
             });
+        });
+        // Obtenez les données mensuelles à partir de la variable PHP passée à la vue
+        const donnéesMensuelles = {!! json_encode($data['monthlyData']) !!};
+
+        // Préparez les étiquettes pour l'axe des X (mois)
+        const mois = Object.keys(donnéesMensuelles);
+
+        // Préparez les ensembles de données pour les dépenses totales et les revenus totaux
+        const donnéesDépenses = mois.map(mois => donnéesMensuelles[mois].totalExpenses);
+        const donnéesRevenus = mois.map(mois => donnéesMensuelles[mois].totalRevenue);
+
+        // Créez le graphique linéaire
+        const ctx = document.getElementById('monthlyChart').getContext('2d');
+        const monthlyChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: mois,
+                datasets: [{
+                        label: 'Dépenses totales',
+                        data: donnéesDépenses,
+                        borderColor: 'red',
+                        backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Revenus totaux',
+                        data: donnéesRevenus,
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 500 // Ajustez la taille du pas pour les graduations de l'axe Y selon vos besoins
+                        }
+                    }
+                }
+            }
         });
     </script>
 @endpush

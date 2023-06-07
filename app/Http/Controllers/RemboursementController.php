@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class RemboursementController extends Controller
 {
@@ -66,6 +67,7 @@ class RemboursementController extends Controller
         $remboursement->montant = $request->montant;
         $remboursement->approuve = false;
         $remboursement->solde_id = $solde->id;
+        $remboursement->user_id = Auth::id();
         $remboursement->date_remboursement = $request->date_remboursement;
         $remboursement->feuille = $request->file('feuille')->store();
         $remboursement->save();

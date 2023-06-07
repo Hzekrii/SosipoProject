@@ -20,8 +20,9 @@
                             <th scope="col">Crédit</th>
                             <th scope="col">Designation</th>
                             <th scope="col">Montant</th>
-                            <th scope="col">Approuve</th>
-                            <th scope="col">date remboursement</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col">Signature</th>
+                            <th scope="col">Date remboursement</th>
                             <th scope="col">Feuille</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -40,11 +41,11 @@
                                         <span class="badge bg-warning text-dark">En attente</span>
                                     @endif
                                 </td>
+                                <td>{{ $remboursement->user->name }}</td>
                                 <td>{{ $remboursement->date_remboursement }}</td>
-                                {{-- <td>{{ $remboursement->user->name }}</td> --}}
                                 <td>
                                     <a href="{{ url('remboursement/pdf/' . $remboursement->feuille) }}"
-                                        class="btn btn-primary" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                                        class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a>
                                 </td>
                                 <td>
                                     @if ($remboursement->approuve)

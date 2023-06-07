@@ -45,7 +45,7 @@ class ApprouveRemboursementController extends Controller
         $solde->save();
         $remboursement->save();
         // Redirect to the same page with a success message
-        return redirect()->route('approuve.remboursement.show')->withSuccess('Le remboursement approuvé avec succès.');
+        return back()->withSuccess('Le remboursement approuvé avec succès.');
     }
 
     public function destroy($id)

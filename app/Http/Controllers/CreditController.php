@@ -11,22 +11,25 @@ use App\Models\Solde;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 class CreditController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-{
+    {
 
-    $adherents=Adherent::get();
-        $data=[
-            'title'=>$des='Ajouter Un Crédit',
-            'description'=>$des,
-            'adherents'=>$adherents,
+        $adherents = Adherent::orderBy('created_at')->get();
+
+        $data = [
+            'title' => $des = 'Ajouter Un Crédit',
+            'description' => $des,
+            'adherents' => $adherents,
         ];
-        return view('credit.add',$data);
-}
+        return view('credit.add', $data);
+    }
 
 
     /**
@@ -50,8 +53,8 @@ class CreditController extends Controller
     {
 
         $request->validate([
-            'designation'=>'required|min:7',
-            'adherent_id'=>'required',
+            'designation' => 'required|min:7',
+            'adherent_id' => 'required',
             'montant' => 'required',
             'modepaiement' => 'required',
             'date_credit' => 'required',
@@ -59,24 +62,24 @@ class CreditController extends Controller
 
         ]);
 
-        $year=Carbon::createFromFormat('Y-m-d',$request->date_credit)->year;
-        $solde=Solde::where('annee',$year)->pluck('id')->first();
+        $year = Carbon::createFromFormat('Y-m-d', $request->date_credit)->year;
+        $solde = Solde::where('annee', $year)->pluck('id')->first();
 
         //  dd($solde);
-        $credit=new Credit();
-        $credit->adherent_id=request('adherent_id');
-        $credit->designation=request('designation');
-        $credit->montant=request('montant');
-        $credit->approuve=false;
-        $credit->solde_id=$solde;
-        $credit->modepaiement=request('modepaiement');
-        $credit->date_credit=request('date_credit');
-        $credit->file=request('file')->store();
+        $credit = new Credit();
+        $credit->adherent_id = request('adherent_id');
+        $credit->designation = request('designation');
+        $credit->montant = request('montant');
+        $credit->approuve = false;
+        $credit->solde_id = $solde;
+        $credit->user_id = Auth::id();
+        $credit->modepaiement = request('modepaiement');
+        $credit->date_credit = request('date_credit');
+        $credit->file = request('file')->store();
         $credit->save();
         $success = "Ajout avec success";
         return back()->withSuccess($success);
-
-        }
+    }
 
     /**
      * Display the specified resource.
@@ -84,14 +87,14 @@ class CreditController extends Controller
     public function show(Credit $credit)
     {
         $sommes = remboursement::selectRaw('credit_id, SUM(montant) as sum')
-                          ->where('approuve',1)
-                          ->groupBy('credit_id')
-                          ->get();
+            ->where('approuve', 1)
+            ->groupBy('credit_id')
+            ->get();
 
         $credits = Credit::all();
 
         $restes = array();
-        foreach($credits as $credit) {
+        foreach ($credits as $credit) {
             $restes[] = [
                 'credit' => $credit->id,
                 'reste' => $credit->montant - ($sommes->where('credit_id', $credit->id)->first()->sum ?? 0),
@@ -114,14 +117,14 @@ class CreditController extends Controller
     public function edit($id)
     {
         $credit = Credit::find($id);
-        $adherents=Adherent::get();
-        $data=[
-            'title'=>$des='Modifier Un Crédit',
-            'description'=>$des,
-            'credit'=>$credit,
-            'adherents'=>$adherents,
+        $adherents = Adherent::get();
+        $data = [
+            'title' => $des = 'Modifier Un Crédit',
+            'description' => $des,
+            'credit' => $credit,
+            'adherents' => $adherents,
         ];
-        return view('credit.edit',$data);
+        return view('credit.edit', $data);
     }
 
     /**
@@ -130,8 +133,8 @@ class CreditController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'designation'=>'required|min:7',
-            'adherent_id'=>'required',
+            'designation' => 'required|min:7',
+            'adherent_id' => 'required',
             'montant' => 'required',
             'modepaiement' => 'required',
             'date_credit' => 'required',
@@ -156,7 +159,7 @@ class CreditController extends Controller
         $credit->modepaiement = $request->modepaiement;
         $credit->adherent_id = $request->adherent_id;
         $credit->date_credit = $request->date_credit;
-        $credit->approuve=$credit->approuve;
+        $credit->approuve = $credit->approuve;
 
         // $credit->user_id = auth()->id();
 
@@ -201,16 +204,16 @@ class CreditController extends Controller
             return back()->withSuccess('Suppression avec succes.');
         }
         return back()->withError('Vous ne pouvez pas supprimer cet credit.');
-
     }
-    public function afficher(Credit $credit){
+    public function afficher(Credit $credit)
+    {
         $pdf = $credit->file;
         // dd($pdf);
         if ($pdf) {
             $pathToFile = storage_path("app/{$pdf}");
             $headers = [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="credit'.$credit->id.'-credit-file.pdf"',
+                'Content-Disposition' => 'inline; filename="credit' . $credit->id . '-credit-file.pdf"',
             ];
             return response()->file($pathToFile, $headers);
             // dd($pathToFile);
@@ -219,4 +222,3 @@ class CreditController extends Controller
         }
     }
 }
-?>
