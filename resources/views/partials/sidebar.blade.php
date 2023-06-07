@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse h-100">
             <ul class="navbar-nav">
                 <li class="nav-item mt-3">
-                    <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                    <a id="loading" onclick="showLoading(event)"
                         class="nav-link btn btn-gradient-success text-light" href="{{ route('charts') }}"
                         data-color="success">
                         <div
@@ -23,7 +23,7 @@
                 </li>
                 @if (auth()->user()->role_id != '3')
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        <a id="loading" onclick="showLoading(event)"
                             class="nav-link btn btn btn-gradient-success text-light" href="{{ route('recette.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        <a id="loading" onclick="showLoading(event)"
                             class="nav-link btn btn-gradient-success text-light" href="{{ route('depense.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        <a id="loading" onclick="showLoading(event)"
                             class="nav-link btn btn-gradient-success text-light" href="{{ route('credit.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        <a id="loading" onclick="showLoading(event)"
                             class="nav-link btn btn-gradient-success text-light"
                             href="{{ route('remboursement.show') }}">
                             <div
@@ -65,7 +65,7 @@
                     </li>
                     @if (Auth::user()->role_id == '1' )
                         <li class="nav-item mt-3">
-                            <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                            <a id="loading" onclick="showLoading(event)"
                                 class="nav-link btn btn-gradient-success text-light"
                                 href="{{ route('adherents.index') }}">
                                 <div
@@ -80,7 +80,7 @@
                 @endif
                 @if (Auth::user()->role_id == '3' || Auth::user()->role_id == '1')
                     <li class="nav-item mt-3">
-                        <a id="loading" onclick="sidebarColor(this); showLoading(event)"
+                        <a id="loading" onclick="showLoading(event)"
                             class="nav-link btn btn-gradient-success text-light" href="{{ route('document.show') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

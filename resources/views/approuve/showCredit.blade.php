@@ -10,10 +10,7 @@ use App\Models\Adherent;
         </div>
         <div class="card-body px-4 pt-0 pb-2">
             <div class="table-responsive mt-4">
-<<<<<<< HEAD
-=======
               
->>>>>>> 58b6fc75cc4d82889d7cd0582f995d8805c6f40a
                 <table id="table-datatable" class="table table-striped dt-responsive nowrap light-mode-table"
                     style="font-size: 0.9em;">
                     <thead>
